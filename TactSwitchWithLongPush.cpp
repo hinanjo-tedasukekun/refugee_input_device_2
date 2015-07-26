@@ -4,8 +4,8 @@
 
 TactSwitchWithLongPush::TactSwitchWithLongPush(
   const int pin,
-  const unsigned int short_push_count,
-  const unsigned int long_push_count
+  const int short_push_count,
+  const int long_push_count
 ) :
   pin_(pin),
   short_push_count_(short_push_count),

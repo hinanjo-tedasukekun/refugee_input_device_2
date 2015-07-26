@@ -1,5 +1,5 @@
-#ifndef _INPUT_APP_H
-#define _INPUT_APP_H
+#ifndef INPUT_APP_H
+#define INPUT_APP_H
 
 #include "LiquidCrystal.h"
 
@@ -30,7 +30,7 @@ private:
   AppState prev_state_;
 
   String leader_id_;
-  unsigned int num_of_members_;
+  int num_of_members_;
 
 public:
   InputApp();
@@ -40,7 +40,7 @@ public:
   void loop();
 
   void setLeaderId(const char* leader_id);
-  void setNumOfMembers(unsigned int num_of_members);
+  void setNumOfMembers(int num_of_members);
 };
 
 #endif

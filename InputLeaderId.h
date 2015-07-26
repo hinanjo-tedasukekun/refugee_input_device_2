@@ -1,5 +1,5 @@
-#ifndef _INPUT_LEADER_ID_H
-#define _INPUT_LEADER_ID_H
+#ifndef INPUT_LEADER_ID_H
+#define INPUT_LEADER_ID_H
 
 #include "LiquidCrystal.h"
 

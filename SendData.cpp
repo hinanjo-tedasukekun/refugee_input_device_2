@@ -9,7 +9,7 @@ SendData::SendData(InputApp* app, LiquidCrystal* lcd) :
 {
 }
 
-void SendData::execute(String leader_id, unsigned int num_of_members) {
+void SendData::execute(String leader_id, int num_of_members) {
   printSending();
 
   String data = leader_id + ',' + num_of_members;

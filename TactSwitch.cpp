@@ -2,7 +2,7 @@
 
 #include "TactSwitch.h"
 
-TactSwitch::TactSwitch(const int pin, const unsigned int push_count) :
+TactSwitch::TactSwitch(const int pin, const int push_count) :
   pin_(pin),
   push_count_(push_count),
   down_count_(0)

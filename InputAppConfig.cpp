@@ -11,5 +11,5 @@ const int InputAppConfig::PIN_SW_SEND = 3;
 
 const int InputAppConfig::PIN_SW_RESET = 2;
 
-const unsigned int InputAppConfig::SW_SHORT_PUSH_COUNT = 2;
-const unsigned int InputAppConfig::SW_LONG_PUSH_COUNT = 20;
+const int InputAppConfig::SW_SHORT_PUSH_COUNT = 5;
+const int InputAppConfig::SW_LONG_PUSH_COUNT = 20;

@@ -1,5 +1,5 @@
-#ifndef _INPUT_APP_CONFIG_H
-#define _INPUT_APP_CONFIG_H
+#ifndef INPUT_APP_CONFIG_H
+#define INPUT_APP_CONFIG_H
 
 struct InputAppConfig {
   static const int LEADER_ID_LENGTH = 8;
@@ -15,8 +15,8 @@ struct InputAppConfig {
 
   static const int PIN_SW_RESET;
 
-  static const unsigned int SW_SHORT_PUSH_COUNT;
-  static const unsigned int SW_LONG_PUSH_COUNT;
+  static const int SW_SHORT_PUSH_COUNT;
+  static const int SW_LONG_PUSH_COUNT;
 };
 
 #endif

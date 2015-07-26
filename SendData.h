@@ -1,5 +1,5 @@
-#ifndef _SEND_DATA_H
-#define _SEND_DATA_H
+#ifndef SEND_DATA_H
+#define SEND_DATA_H
 
 #include "LiquidCrystal.h"
 
@@ -12,7 +12,7 @@ private:
 
 public:
   SendData(InputApp* app, LiquidCrystal* lcd);
-  void execute(String leader_id_, unsigned int num_of_members);
+  void execute(String leader_id_, int num_of_members);
 
 private:
   void printSending();

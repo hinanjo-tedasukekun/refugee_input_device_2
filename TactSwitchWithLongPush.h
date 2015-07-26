@@ -1,5 +1,5 @@
-#ifndef _TACT_SWITCH_WITH_LONG_PUSH_H
-#define _TACT_SWITCH_WITH_LONG_PUSH_H
+#ifndef TACT_SWITCH_WITH_LONG_PUSH_H
+#define TACT_SWITCH_WITH_LONG_PUSH_H
 
 class TactSwitchWithLongPush {
 public:
@@ -14,16 +14,16 @@ private:
   const int pin_; // ピン番号
 
   // 短く押されたと認識されるのに必要なカウント数
-  const unsigned int short_push_count_; 
+  const int short_push_count_; 
   // 長く押されたと認識されるのに必要なカウント数
-  const unsigned int long_push_count_;
+  const int long_push_count_;
 
-  unsigned int down_count_; // 下がっている状態のカウント数
+  int down_count_; // 下がっている状態のカウント数
 public:
   TactSwitchWithLongPush(
     const int pin,
-    const unsigned int short_push_count,
-    const unsigned int long_push_count
+    const int short_push_count,
+    const int long_push_count
   );
   // 状態をリセットする
   void reset();

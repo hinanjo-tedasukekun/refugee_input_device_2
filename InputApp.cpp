@@ -81,7 +81,7 @@ void InputApp::setLeaderId(const char* leader_id) {
   state_ = STATE_INPUT_NUM_OF_MEMBERS;
 }
 
-void InputApp::setNumOfMembers(unsigned int num_of_members) {
+void InputApp::setNumOfMembers(int num_of_members) {
   num_of_members_ = num_of_members;
   state_ = STATE_SEND_DATA;
 }

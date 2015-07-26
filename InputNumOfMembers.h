@@ -1,5 +1,5 @@
-#ifndef _INPUT_NUM_OF_MEMBERS_H
-#define _INPUT_NUM_OF_MEMBERS_H
+#ifndef INPUT_NUM_OF_MEMBERS_H
+#define INPUT_NUM_OF_MEMBERS_H
 
 #include "LiquidCrystal.h"
 
@@ -9,10 +9,10 @@ class InputApp;
 
 class InputNumOfMembers {
 public:
-  static const unsigned int NUM_OF_SWITCHES = 6;
+  static const int NUM_OF_SWITCHES = 6;
 
 private:
-  unsigned int num_of_members_;
+  int num_of_members_;
   bool num_of_members_changed_;
 
   InputApp* app_;
@@ -38,7 +38,7 @@ public:
   void loop();
   void handleSwitchEvents();
   void updateNumOnLcd();
-  void setNumOfMembers(unsigned int num);
+  void setNumOfMembers(int num);
 };
 
 #endif
