@@ -4,6 +4,10 @@
 struct InputAppConfig {
   static const int LEADER_ID_LENGTH = 8;
 
+  static const int PIN_READER_VCC;
+  static const int PIN_READER_RX;
+  static const int PIN_READER_TX;
+
   static const int PIN_LED_SUCCESS;
   static const int PIN_LED_ERROR;
 

@@ -1,5 +1,9 @@
 #include "InputAppConfig.h"
 
+const int InputAppConfig::PIN_READER_VCC = 13;
+const int InputAppConfig::PIN_READER_RX = 8;
+const int InputAppConfig::PIN_READER_TX = 9;
+
 const int InputAppConfig::PIN_LED_SUCCESS = 10;
 const int InputAppConfig::PIN_LED_ERROR = 11;
 

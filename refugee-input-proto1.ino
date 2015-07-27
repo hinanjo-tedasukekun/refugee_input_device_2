@@ -5,6 +5,7 @@
  */
 
 #include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
 #include "InputApp.h"
 
 InputApp app;

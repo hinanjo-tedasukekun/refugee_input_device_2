@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include "LiquidCrystal.h"
+#include "SoftwareSerial.h"
 #include <string.h>
 
 #include "InputAppConfig.h"
@@ -10,7 +11,10 @@
 
 InputApp::InputApp() :
   lcd_(12, A4, A3, A2, A1, A0),
-  input_leader_id_(this, &lcd_),
+  reader_serial_(
+    InputAppConfig::PIN_READER_RX, InputAppConfig::PIN_READER_TX
+  ),
+  input_leader_id_(this, &lcd_, &reader_serial_),
   input_num_of_members_(this, &lcd_),
   send_data_(this, &lcd_),
   state_(STATE_INPUT_LEADER_ID),
@@ -24,10 +28,12 @@ void InputApp::setup() {
   randomSeed(analogRead(5));
 
   Serial.begin(9600);
+  reader_serial_.begin(9600);
 
+  pinMode(InputAppConfig::PIN_READER_VCC, OUTPUT);
   pinMode(InputAppConfig::PIN_LED_SUCCESS, OUTPUT);
   pinMode(InputAppConfig::PIN_LED_ERROR, OUTPUT);
-  input_leader_id_.setupLeds();
+  input_leader_id_.setupPorts();
 
   lcd_.begin(16, 2);
   input_leader_id_.setupLcd();
@@ -46,7 +52,7 @@ void InputApp::loop() {
   case STATE_INPUT_LEADER_ID:
     if (current_state != prev_state_) {
       input_leader_id_.reset();
-      input_leader_id_.setupLeds();
+      input_leader_id_.setupPorts();
       input_leader_id_.setupLcd();
     }
 
@@ -76,8 +82,8 @@ void InputApp::loop() {
   delay(10);
 }
 
-void InputApp::setLeaderId(const char* leader_id) {
-  leader_id_ = String(leader_id);
+void InputApp::setLeaderId(String leader_id) {
+  leader_id_ = leader_id;
   state_ = STATE_INPUT_NUM_OF_MEMBERS;
 }
 

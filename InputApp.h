@@ -2,6 +2,7 @@
 #define INPUT_APP_H
 
 #include "LiquidCrystal.h"
+#include "SoftwareSerial.h"
 
 #include "InputAppConfig.h"
 #include "InputLeaderId.h"
@@ -21,6 +22,7 @@ public:
 
 private:
   LiquidCrystal lcd_;
+  SoftwareSerial reader_serial_;
 
   InputLeaderId input_leader_id_;
   InputNumOfMembers input_num_of_members_;
@@ -39,7 +41,7 @@ public:
   void reset();
   void loop();
 
-  void setLeaderId(const char* leader_id);
+  void setLeaderId(String leader_id);
   void setNumOfMembers(int num_of_members);
 };
 

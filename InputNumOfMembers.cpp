@@ -94,7 +94,7 @@ void InputNumOfMembers::updateNumOnLcd() {
   lcd_->print(num_str);
 }
 
-void InputNumOfMembers::setNumOfMembers(unsigned int num) {
+void InputNumOfMembers::setNumOfMembers(int num) {
   num_of_members_ = num;
   num_of_members_changed_ = true;
 }

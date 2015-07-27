@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "LiquidCrystal.h"
+#include "SoftwareSerial.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -8,28 +9,30 @@
 #include "TactSwitchWithLongPush.h"
 #include "InputLeaderId.h"
 
-InputLeaderId::InputLeaderId(InputApp* app, LiquidCrystal* lcd) :
-  LEADER_ID_FORMAT("%08d"),
-  leader_id_ {},
+InputLeaderId::InputLeaderId(
+  InputApp* app, LiquidCrystal* lcd, SoftwareSerial* reader_serial
+) :
+  ring_buffer_(),
   leader_id_changed_(false),
   app_(app),
   lcd_(lcd),
+  reader_serial_(reader_serial),
   input_sw_(
     InputAppConfig::PIN_SW_RESET,
-    InputAppConfig::SW_SHORT_PUSH_COUNT,
-    InputAppConfig::SW_LONG_PUSH_COUNT
+    InputAppConfig::SW_SHORT_PUSH_COUNT
   )
 {
 }
 
 void InputLeaderId::reset() {
-  memset(leader_id_, '\0', 9);
+  ring_buffer_.clear();
   leader_id_changed_ = false;
 
   input_sw_.reset();
 }
 
-void InputLeaderId::setupLeds() {
+void InputLeaderId::setupPorts() {
+  digitalWrite(InputAppConfig::PIN_READER_VCC, LOW);
   digitalWrite(InputAppConfig::PIN_LED_SUCCESS, HIGH);
   digitalWrite(InputAppConfig::PIN_LED_ERROR, HIGH);
 }
@@ -46,40 +49,36 @@ void InputLeaderId::setupLcd() {
 void InputLeaderId::loop() {
   handleInputSwEvent(input_sw_.readState());
 
-  if (leader_id_changed_) {
-    leader_id_changed_ = false;
+  if (reader_serial_->available() > 0) {
+    char c = reader_serial_->read();
 
-    app_->setLeaderId(static_cast<const char*>(leader_id_));
+    if (c == '\n') {
+      app_->setLeaderId(ring_buffer_.toString());
+      delay(100);
+      digitalWrite(InputAppConfig::PIN_READER_VCC, LOW);
+
+      return;
+    }
+
+    ring_buffer_.pushBack(c);
     updateLeaderIdOnLcd();
   }
 }
 
-void InputLeaderId::handleInputSwEvent(
-  TactSwitchWithLongPush::SwitchState state
-) {
+void InputLeaderId::handleInputSwEvent(TactSwitch::SwitchState state) {
   switch (state) {
-  case TactSwitchWithLongPush::SW_PUSHED_SHORT:
-    inputSwPushedShort();
-    break;
-  case TactSwitchWithLongPush::SW_PUSHED_LONG:
-    inputSwPushedLong();
+  case TactSwitch::SW_PUSHED:
+    inputSwPushed();
     break;
   default:
     break;
   }
 }
 
-void InputLeaderId::inputSwPushedShort() {
-  sprintf(leader_id_, LEADER_ID_FORMAT, 123);
-  leader_id_changed_ = true;
-}
-
-void InputLeaderId::inputSwPushedLong() {
-  sprintf(leader_id_, LEADER_ID_FORMAT, (int)random(1, 1000));
-  leader_id_changed_ = true;
+void InputLeaderId::inputSwPushed() {
 }
 
 void InputLeaderId::updateLeaderIdOnLcd() {
   lcd_->setCursor(7, 0);
-  lcd_->print(leader_id_);
+  lcd_->print(ring_buffer_.toString());
 }
