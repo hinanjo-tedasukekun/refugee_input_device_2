@@ -3,7 +3,7 @@
 #include "InputAppConfig.h"
 #include "SendData.h"
 
-SendData::SendData(InputApp* app, LiquidCrystal* lcd) :
+SendData::SendData(InputApp* app, I2CLiquidCrystal* lcd) :
   app_(app),
   lcd_(lcd)
 {

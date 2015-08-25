@@ -4,7 +4,8 @@
  * 避難者人数入力端末 試作版
  */
 
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <I2CLiquidCrystal.h>
 #include <SoftwareSerial.h>
 #include "InputApp.h"
 

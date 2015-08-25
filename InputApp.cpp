@@ -1,7 +1,7 @@
 // vim: fileencoding=utf-8
 
 #include <Arduino.h>
-#include "LiquidCrystal.h"
+#include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 #include <string.h>
 
@@ -10,7 +10,7 @@
 #include "InputLeaderId.h"
 
 InputApp::InputApp() :
-  lcd_(12, A4, A3, A2, A1, A0),
+  lcd_(20, (bool)true),
   reader_serial_(
     InputAppConfig::PIN_READER_RX, InputAppConfig::PIN_READER_TX
   ),
@@ -25,8 +25,6 @@ InputApp::InputApp() :
 }
 
 void InputApp::setup() {
-  randomSeed(analogRead(5));
-
   Serial.begin(9600);
   reader_serial_.begin(9600);
 

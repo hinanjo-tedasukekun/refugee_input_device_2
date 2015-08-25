@@ -1,7 +1,7 @@
 #ifndef INPUT_LEADER_ID_H
 #define INPUT_LEADER_ID_H
 
-#include "LiquidCrystal.h"
+#include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 
 #include "InputAppConfig.h"
@@ -19,13 +19,13 @@ private:
 
   InputApp* app_;
   // LCD
-  LiquidCrystal* lcd_;
+  I2CLiquidCrystal* lcd_;
   SoftwareSerial* reader_serial_;
   TactSwitch input_sw_;
 
 public:
   InputLeaderId(
-    InputApp* app, LiquidCrystal* lcd, SoftwareSerial* reader_serial
+    InputApp* app, I2CLiquidCrystal* lcd, SoftwareSerial* reader_serial
   );
   // 状態をリセットする
   void reset();

@@ -1,7 +1,7 @@
 #ifndef INPUT_NUM_OF_MEMBERS_H
 #define INPUT_NUM_OF_MEMBERS_H
 
-#include "LiquidCrystal.h"
+#include "I2CLiquidCrystal.h"
 
 #include "TactSwitch.h"
 
@@ -17,7 +17,7 @@ private:
 
   InputApp* app_;
   // LCD
-  LiquidCrystal* lcd_;
+  I2CLiquidCrystal* lcd_;
 
   TactSwitch sw_1_;
   TactSwitch sw_2_;
@@ -29,7 +29,7 @@ private:
   TactSwitch* switches_[NUM_OF_SWITCHES];
 
 public:
-  InputNumOfMembers(InputApp* app, LiquidCrystal* lcd);
+  InputNumOfMembers(InputApp* app, I2CLiquidCrystal* lcd);
   // 状態をリセットする
   void reset();
   // LCD を初期状態にする

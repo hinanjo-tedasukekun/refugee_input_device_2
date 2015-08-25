@@ -1,12 +1,12 @@
 #include <Arduino.h>
-#include "LiquidCrystal.h"
+#include "I2CLiquidCrystal.h"
 
 #include "InputAppConfig.h"
 #include "InputApp.h"
 #include "TactSwitch.h"
 #include "InputNumOfMembers.h"
 
-InputNumOfMembers::InputNumOfMembers(InputApp* app, LiquidCrystal* lcd) :
+InputNumOfMembers::InputNumOfMembers(InputApp* app, I2CLiquidCrystal* lcd) :
   num_of_members_(1),
   num_of_members_changed_(false),
   app_(app),

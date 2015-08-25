@@ -1,7 +1,7 @@
 #ifndef INPUT_APP_H
 #define INPUT_APP_H
 
-#include "LiquidCrystal.h"
+#include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 
 #include "InputAppConfig.h"
@@ -21,7 +21,7 @@ public:
   };
 
 private:
-  LiquidCrystal lcd_;
+  I2CLiquidCrystal lcd_;
   SoftwareSerial reader_serial_;
 
   InputLeaderId input_leader_id_;

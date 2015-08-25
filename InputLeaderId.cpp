@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "LiquidCrystal.h"
+#include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 #include <stdio.h>
 #include <string.h>
@@ -10,7 +10,7 @@
 #include "InputLeaderId.h"
 
 InputLeaderId::InputLeaderId(
-  InputApp* app, LiquidCrystal* lcd, SoftwareSerial* reader_serial
+  InputApp* app, I2CLiquidCrystal* lcd, SoftwareSerial* reader_serial
 ) :
   ring_buffer_(),
   leader_id_changed_(false),
