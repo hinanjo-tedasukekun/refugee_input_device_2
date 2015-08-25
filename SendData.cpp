@@ -53,8 +53,8 @@ void SendData::printUpdated() {
 
 void SendData::printError() {
   lcd_->setCursor(0, 1);
-  // "ソウシンエラー"
-  lcd_->print("\xBF\xB3\xBC\xDD\xB4\xD7\xB0        ");
+  // "トウロクデキマセンデシタ"
+  lcd_->print("\xC4\xB3\xDB\xB8\xC3\xDE\xB7\xCF\xBE\xDD\xC3\xDE\xBC\xC0 ");
 }
 
 void SendData::blinkLed(int pin) {
