@@ -4,22 +4,43 @@
 struct InputAppConfig {
   static const int LEADER_ID_LENGTH = 8;
 
+  // バーコードリーダー電源制御ピン
   static const int PIN_READER_VCC;
+  // バーコードリーダー RX ピン
   static const int PIN_READER_RX;
+  // バーコードリーダー TX ピン
   static const int PIN_READER_TX;
 
+  // 送信成功 LED ピン
   static const int PIN_LED_SUCCESS;
+  // エラー LED ピン
   static const int PIN_LED_ERROR;
 
+  // 「1人」ボタンピン
   static const int PIN_SW_1;
+  // 「2人」ボタンピン
   static const int PIN_SW_2;
+  // 「3人」ボタンピン
+  static const int PIN_SW_3;
+  // 「4人」ボタンピン
+  static const int PIN_SW_4;
+  // 「＋」ボタンピン
   static const int PIN_SW_PLUS;
+  // 「−」ボタンピン
   static const int PIN_SW_MINUS;
+  // 「入室」ボタンピン
+  static const int PIN_SW_ENTER;
+  // 「退室」ボタンピン
+  static const int PIN_SW_LEAVE;
+  // 「送信」ボタンピン
   static const int PIN_SW_SEND;
 
+  // リセットボタンピン
   static const int PIN_SW_RESET;
 
+  // ボタンが押されたと判断するまでのカウント数
   static const int SW_SHORT_PUSH_COUNT;
+  // ボタンが長押しされたと判断するまでのカウント数
   static const int SW_LONG_PUSH_COUNT;
 };
 

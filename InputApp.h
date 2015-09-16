@@ -43,6 +43,10 @@ public:
 
   void setLeaderId(String leader_id);
   void setNumOfMembers(int num_of_members);
+
+private:
+  // スイッチのプルアップ抵抗を有効にする
+  void enablePullUpResistorOfSwitches();
 };
 
 #endif

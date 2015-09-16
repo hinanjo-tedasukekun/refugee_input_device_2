@@ -1,35 +1,54 @@
 #include <Arduino.h>
 
 #include "InputAppConfig.h"
+#include "InputApp.h"
+#include "TactSwitch.h"
 #include "SendData.h"
 
 SendData::SendData(InputApp* app, I2CLiquidCrystal* lcd) :
   app_(app),
-  lcd_(lcd)
+  lcd_(lcd),
+  sw_reset_(InputAppConfig::PIN_SW_RESET, InputAppConfig::SW_SHORT_PUSH_COUNT)
 {
 }
 
 void SendData::execute(String leader_id, int num_of_members) {
+  sw_reset_.reset();
   printSending();
 
   String data = leader_id + ',' + num_of_members;
   Serial.println(data);
 
-  while (Serial.available() < 1);
+  while (1) {
+    if (sw_reset_.readState() == TactSwitch::SW_PUSHED) {
+      // リセットボタンが押されたら何もしない
+      return;
+    }
 
-  switch (Serial.read()) {
-  case 'R':
-    printRegistered();
-    blinkLed(InputAppConfig::PIN_LED_SUCCESS);
-    break;
-  case 'U':
-    printUpdated();
-    blinkLed(InputAppConfig::PIN_LED_SUCCESS);
-    break;
-  default:
-    printError();
-    blinkLed(InputAppConfig::PIN_LED_ERROR);
-    break;
+    if (Serial.available() > 0) {
+      switch (Serial.read()) {
+      case 'R':
+        printRegistered();
+        blinkLed(InputAppConfig::PIN_LED_SUCCESS);
+
+        break;
+      case 'U':
+        printUpdated();
+        blinkLed(InputAppConfig::PIN_LED_SUCCESS);
+
+        break;
+      default:
+        printError();
+        blinkLed(InputAppConfig::PIN_LED_ERROR);
+
+        break;
+      }
+
+      delay(WAIT_TIME_AFTER_SEND);
+      return;
+    }
+
+    delay(10);
   }
 }
 

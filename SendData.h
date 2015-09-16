@@ -3,12 +3,18 @@
 
 #include "I2CLiquidCrystal.h"
 
+#include "TactSwitch.h"
+
 class InputApp;
 
 class SendData {
 private:
+  // 送信後リセットするまでの待ち時間 [ms]
+  static const int WAIT_TIME_AFTER_SEND = 2100;
+
   InputApp* app_;
   I2CLiquidCrystal* lcd_;
+  TactSwitch sw_reset_;
 
 public:
   SendData(InputApp* app, I2CLiquidCrystal* lcd);

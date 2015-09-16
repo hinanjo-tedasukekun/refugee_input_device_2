@@ -13,11 +13,16 @@ InputNumOfMembers::InputNumOfMembers(InputApp* app, I2CLiquidCrystal* lcd) :
   lcd_(lcd),
   sw_1_(InputAppConfig::PIN_SW_1, InputAppConfig::SW_SHORT_PUSH_COUNT),
   sw_2_(InputAppConfig::PIN_SW_2, InputAppConfig::SW_SHORT_PUSH_COUNT),
+  sw_3_(InputAppConfig::PIN_SW_3, InputAppConfig::SW_SHORT_PUSH_COUNT),
+  sw_4_(InputAppConfig::PIN_SW_4, InputAppConfig::SW_SHORT_PUSH_COUNT),
   sw_plus_(InputAppConfig::PIN_SW_PLUS, InputAppConfig::SW_SHORT_PUSH_COUNT),
   sw_minus_(InputAppConfig::PIN_SW_MINUS, InputAppConfig::SW_SHORT_PUSH_COUNT),
   sw_send_(InputAppConfig::PIN_SW_SEND, InputAppConfig::SW_SHORT_PUSH_COUNT),
   sw_reset_(InputAppConfig::PIN_SW_RESET, InputAppConfig::SW_SHORT_PUSH_COUNT),
-  switches_ {&sw_1_, &sw_2_, &sw_plus_, &sw_minus_, &sw_send_, &sw_reset_}
+  switches_ {
+    &sw_1_, &sw_2_, &sw_3_, &sw_4_,
+    &sw_plus_, &sw_minus_, &sw_send_, &sw_reset_
+  }
 {
 }
 
@@ -59,6 +64,16 @@ void InputNumOfMembers::handleSwitchEvents() {
 
   if (sw_2_.readState() == TactSwitch::SW_PUSHED) {
     setNumOfMembers(2);
+    return;
+  }
+
+  if (sw_3_.readState() == TactSwitch::SW_PUSHED) {
+    setNumOfMembers(3);
+    return;
+  }
+
+  if (sw_4_.readState() == TactSwitch::SW_PUSHED) {
+    setNumOfMembers(4);
     return;
   }
 

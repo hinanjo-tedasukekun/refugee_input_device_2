@@ -33,6 +33,8 @@ void InputApp::setup() {
   pinMode(InputAppConfig::PIN_LED_ERROR, OUTPUT);
   input_leader_id_.setupPorts();
 
+  enablePullUpResistorOfSwitches();
+
   lcd_.begin(16, 2);
   input_leader_id_.setupLcd();
 }
@@ -41,6 +43,16 @@ void InputApp::reset() {
   state_ = STATE_INPUT_LEADER_ID;
   leader_id_ = "";
   num_of_members_ = 1;
+
+  // シリアル通信の読み残しがあれば、すべて読んで残りデータを空にする
+  // 本体、バーコードリーダーの両方について行う
+  while (Serial.available() > 0) {
+    Serial.read();
+  }
+
+  while (reader_serial_.available() > 0) {
+    reader_serial_.read();
+  }
 }
 
 void InputApp::loop() {
@@ -68,7 +80,6 @@ void InputApp::loop() {
     break;
   case STATE_SEND_DATA:
     send_data_.execute(leader_id_, num_of_members_);
-    delay(2100);
     reset();
 
     break;
@@ -88,4 +99,24 @@ void InputApp::setLeaderId(String leader_id) {
 void InputApp::setNumOfMembers(int num_of_members) {
   num_of_members_ = num_of_members;
   state_ = STATE_SEND_DATA;
+}
+
+// スイッチのプルアップ抵抗を有効にする
+void InputApp::enablePullUpResistorOfSwitches() {
+  int sw_pins[] = {
+    InputAppConfig::PIN_SW_1,
+    InputAppConfig::PIN_SW_2,
+    InputAppConfig::PIN_SW_3,
+    InputAppConfig::PIN_SW_4,
+    InputAppConfig::PIN_SW_PLUS,
+    InputAppConfig::PIN_SW_MINUS,
+    InputAppConfig::PIN_SW_ENTER,
+    InputAppConfig::PIN_SW_LEAVE,
+    InputAppConfig::PIN_SW_SEND,
+    InputAppConfig::PIN_SW_RESET
+  };
+
+  for (int pin : sw_pins) {
+    digitalWrite(pin, HIGH);
+  }
 }

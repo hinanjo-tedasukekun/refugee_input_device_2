@@ -9,7 +9,7 @@ class InputApp;
 
 class InputNumOfMembers {
 public:
-  static const int NUM_OF_SWITCHES = 6;
+  static const int NUM_OF_SWITCHES = 8;
 
 private:
   int num_of_members_;
@@ -21,6 +21,8 @@ private:
 
   TactSwitch sw_1_;
   TactSwitch sw_2_;
+  TactSwitch sw_3_;
+  TactSwitch sw_4_;
   TactSwitch sw_plus_;
   TactSwitch sw_minus_;
   TactSwitch sw_send_;
