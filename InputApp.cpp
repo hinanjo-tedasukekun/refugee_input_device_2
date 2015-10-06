@@ -3,14 +3,13 @@
 #include <Arduino.h>
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
-#include <string.h>
 
 #include "InputAppConfig.h"
 #include "InputApp.h"
 #include "InputLeaderId.h"
 
 InputApp::InputApp() :
-  lcd_(20, (bool)true),
+  lcd_(30, (bool)false), // 第 2 引数: false => 3.3 V; true => 5 V
   reader_serial_(
     InputAppConfig::PIN_READER_RX, InputAppConfig::PIN_READER_TX
   ),
