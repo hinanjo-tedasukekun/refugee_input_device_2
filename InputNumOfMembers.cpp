@@ -6,6 +6,7 @@
 #include "TactSwitch.h"
 #include "InputNumOfMembers.h"
 
+// コンストラクタ
 InputNumOfMembers::InputNumOfMembers(InputApp* app, I2CLiquidCrystal* lcd) :
   num_of_members_(1),
   num_of_members_changed_(false),
@@ -26,6 +27,7 @@ InputNumOfMembers::InputNumOfMembers(InputApp* app, I2CLiquidCrystal* lcd) :
 {
 }
 
+// 状態をリセットする
 void InputNumOfMembers::reset() {
   num_of_members_ = 1;
   num_of_members_changed_ = false;
@@ -35,6 +37,13 @@ void InputNumOfMembers::reset() {
   }
 }
 
+// IO ポートを初期状態にする
+void InputNumOfMembers::setupPorts() {
+  // バーコードリーダーの電源を切る
+  digitalWrite(InputAppConfig::PIN_READER_VCC, LOW);
+}
+
+// LCD を初期状態にする
 void InputNumOfMembers::setupLcd() {
   lcd_->setCursor(0, 1);
   lcd_->print("\xC6\xDD\xBD\xDE\xB3          "); // "ニンズウ"
@@ -42,6 +51,7 @@ void InputNumOfMembers::setupLcd() {
   updateNumOnLcd();
 }
 
+// メインループ
 void InputNumOfMembers::loop() {
   handleSwitchEvents();
 

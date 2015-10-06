@@ -4,6 +4,7 @@
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 
+#include "Waiting.h"
 #include "InputAppConfig.h"
 #include "InputLeaderId.h"
 #include "InputNumOfMembers.h"
@@ -15,6 +16,8 @@ class InputApp {
 public:
   // アプリケーションの状態を表す型
   enum AppState {
+    STATE_UNKNOWN,              // 未指定
+    STATE_WAITING,              // 受信ボタンが押されるのを待つ
     STATE_INPUT_LEADER_ID,      // 代表者番号を入力する
     STATE_INPUT_NUM_OF_MEMBERS, // 家族の人数を入力する
     STATE_SEND_DATA             // 情報を送信する
@@ -24,6 +27,7 @@ private:
   I2CLiquidCrystal lcd_;
   SoftwareSerial reader_serial_;
 
+  Waiting waiting_;
   InputLeaderId input_leader_id_;
   InputNumOfMembers input_num_of_members_;
   SendData send_data_;
@@ -41,7 +45,11 @@ public:
   void reset();
   void loop();
 
+  // 代表者番号の入力を開始する
+  void startInputLeaderId();
+  // 代表者番号を設定する
   void setLeaderId(String leader_id);
+  // 人数を設定する
   void setNumOfMembers(int num_of_members);
 
 private:

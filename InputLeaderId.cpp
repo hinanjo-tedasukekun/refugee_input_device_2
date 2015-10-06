@@ -32,9 +32,8 @@ void InputLeaderId::reset() {
 }
 
 void InputLeaderId::setupPorts() {
-  digitalWrite(InputAppConfig::PIN_READER_VCC, LOW);
-  digitalWrite(InputAppConfig::PIN_LED_SUCCESS, HIGH);
-  digitalWrite(InputAppConfig::PIN_LED_ERROR, HIGH);
+  // バーコードリーダーの電源を入れる
+  digitalWrite(InputAppConfig::PIN_READER_VCC, HIGH);
 }
 
 void InputLeaderId::setupLcd() {

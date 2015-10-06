@@ -9,6 +9,7 @@ class InputApp;
 
 class InputNumOfMembers {
 public:
+  // 扱うスイッチの数
   static const int NUM_OF_SWITCHES = 8;
 
 private:
@@ -31,9 +32,12 @@ private:
   TactSwitch* switches_[NUM_OF_SWITCHES];
 
 public:
+  // コンストラクタ
   InputNumOfMembers(InputApp* app, I2CLiquidCrystal* lcd);
   // 状態をリセットする
   void reset();
+  // IO ポートを初期状態にする
+  void setupPorts();
   // LCD を初期状態にする
   void setupLcd();
   // メインループ

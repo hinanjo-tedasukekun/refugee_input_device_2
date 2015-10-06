@@ -13,11 +13,12 @@ InputApp::InputApp() :
   reader_serial_(
     InputAppConfig::PIN_READER_RX, InputAppConfig::PIN_READER_TX
   ),
+  waiting_(this, &lcd_),
   input_leader_id_(this, &lcd_, &reader_serial_),
   input_num_of_members_(this, &lcd_),
   send_data_(this, &lcd_),
-  state_(STATE_INPUT_LEADER_ID),
-  prev_state_(STATE_INPUT_LEADER_ID),
+  state_(STATE_WAITING),
+  prev_state_(STATE_UNKNOWN),
   leader_id_(""),
   num_of_members_(1)
 {
@@ -35,11 +36,10 @@ void InputApp::setup() {
   enablePullUpResistorOfSwitches();
 
   lcd_.begin(16, 2);
-  input_leader_id_.setupLcd();
 }
 
 void InputApp::reset() {
-  state_ = STATE_INPUT_LEADER_ID;
+  state_ = STATE_WAITING;
   leader_id_ = "";
   num_of_members_ = 1;
 
@@ -58,6 +58,16 @@ void InputApp::loop() {
   AppState current_state = state_;
 
   switch (current_state) {
+  case STATE_WAITING:
+    if (current_state != prev_state_) {
+      waiting_.reset();
+      waiting_.setupPorts();
+      waiting_.setupLcd();
+    }
+
+    waiting_.loop();
+
+    break;
   case STATE_INPUT_LEADER_ID:
     if (current_state != prev_state_) {
       input_leader_id_.reset();
@@ -71,6 +81,7 @@ void InputApp::loop() {
   case STATE_INPUT_NUM_OF_MEMBERS:
     if (current_state != prev_state_) {
       input_num_of_members_.reset();
+      input_num_of_members_.setupPorts();
       input_num_of_members_.setupLcd();
     }
 
@@ -88,6 +99,10 @@ void InputApp::loop() {
 
   prev_state_ = current_state;
   delay(10);
+}
+
+void InputApp::startInputLeaderId() {
+  state_ = STATE_INPUT_LEADER_ID;
 }
 
 void InputApp::setLeaderId(String leader_id) {
