@@ -42,6 +42,9 @@ struct InputAppConfig {
   static const int SW_SHORT_PUSH_COUNT;
   // ボタンが長押しされたと判断するまでのカウント数
   static const int SW_LONG_PUSH_COUNT;
+
+  // 代表者番号入力の制限時間（ミリ秒単位）
+  static const unsigned long INPUT_LEADER_ID_TIME_LIMIT;
 };
 
 #endif

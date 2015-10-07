@@ -39,3 +39,6 @@ const int InputAppConfig::PIN_SW_RESET = A0;
 const int InputAppConfig::SW_SHORT_PUSH_COUNT = 5;
 // ボタンが長押しされたと判断するまでのカウント数
 const int InputAppConfig::SW_LONG_PUSH_COUNT = 50;
+
+// 代表者番号入力の制限時間（ミリ秒単位）
+const unsigned long InputAppConfig::INPUT_LEADER_ID_TIME_LIMIT = 15 * 1000;

@@ -17,6 +17,8 @@ private:
   RingBuffer8 ring_buffer_;
   // 代表者番号が変更されたかどうか
   bool leader_id_changed_;
+  // 読み取りを強制終了させる時刻（ミリ秒単位）
+  unsigned long ms_end_;
 
   InputApp* app_;
   // LCD

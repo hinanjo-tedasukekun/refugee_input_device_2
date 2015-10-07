@@ -3,6 +3,7 @@
 #include "SoftwareSerial.h"
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 #include "InputAppConfig.h"
 #include "InputApp.h"
@@ -14,6 +15,7 @@ InputLeaderId::InputLeaderId(
 ) :
   ring_buffer_(),
   leader_id_changed_(false),
+  ms_end_(ULONG_MAX),
   app_(app),
   lcd_(lcd),
   reader_serial_(reader_serial),
@@ -37,6 +39,8 @@ void InputLeaderId::reset() {
   while (reader_serial_->available() > 0) {
     reader_serial_->read();
   }
+
+  ms_end_ = millis() + InputAppConfig::INPUT_LEADER_ID_TIME_LIMIT;
 }
 
 void InputLeaderId::setupPorts() {
@@ -54,6 +58,12 @@ void InputLeaderId::setupLcd() {
 }
 
 void InputLeaderId::loop() {
+  if (millis() > ms_end_) {
+    // 制限時間を過ぎた場合、節電のため強制終了する
+    app_->reset();
+    return;
+  }
+
   if (sw_reset_.readState() == TactSwitch::SW_PUSHED) {
     app_->reset();
     return;
