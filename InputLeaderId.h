@@ -7,6 +7,7 @@
 #include "InputAppConfig.h"
 #include "RingBuffer8.h"
 #include "TactSwitch.h"
+#include "TactSwitchWithLongPush.h"
 
 class InputApp;
 
@@ -20,8 +21,13 @@ private:
   InputApp* app_;
   // LCD
   I2CLiquidCrystal* lcd_;
+
   SoftwareSerial* reader_serial_;
-  TactSwitch input_sw_;
+
+  // リセットボタン
+  TactSwitch sw_reset_;
+  // 読み取りボタン
+  TactSwitchWithLongPush sw_read_;
 
 public:
   InputLeaderId(
@@ -37,10 +43,8 @@ public:
   void loop();
 
 private:
-  // 入力スイッチのイベントを処理する
-  void handleInputSwEvent(TactSwitch::SwitchState state);
-  // 入力スイッチが押されたときの処理
-  void inputSwPushed();
+  // 代表者番号の例を読み込む
+  void readSampleLeaderId();
   // LCD の代表者番号表示を更新する
   void updateLeaderIdOnLcd();
 };

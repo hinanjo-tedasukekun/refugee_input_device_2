@@ -38,4 +38,4 @@ const int InputAppConfig::PIN_SW_RESET = A0;
 // ボタンが押されたと判断するまでのカウント数
 const int InputAppConfig::SW_SHORT_PUSH_COUNT = 5;
 // ボタンが長押しされたと判断するまでのカウント数
-const int InputAppConfig::SW_LONG_PUSH_COUNT = 20;
+const int InputAppConfig::SW_LONG_PUSH_COUNT = 50;

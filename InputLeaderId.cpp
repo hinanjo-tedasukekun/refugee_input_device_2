@@ -17,9 +17,11 @@ InputLeaderId::InputLeaderId(
   app_(app),
   lcd_(lcd),
   reader_serial_(reader_serial),
-  input_sw_(
-    InputAppConfig::PIN_SW_RESET,
-    InputAppConfig::SW_SHORT_PUSH_COUNT
+  sw_reset_(InputAppConfig::PIN_SW_RESET, InputAppConfig::SW_SHORT_PUSH_COUNT),
+  sw_read_(
+    InputAppConfig::PIN_SW_SEND,
+    InputAppConfig::SW_SHORT_PUSH_COUNT,
+    InputAppConfig::SW_LONG_PUSH_COUNT
   )
 {
 }
@@ -28,7 +30,13 @@ void InputLeaderId::reset() {
   ring_buffer_.clear();
   leader_id_changed_ = false;
 
-  input_sw_.reset();
+  sw_reset_.reset();
+  sw_read_.reset();
+
+  // シリアル通信の読み残しがあれば、すべて読んで残りデータを空にする
+  while (reader_serial_->available() > 0) {
+    reader_serial_->read();
+  }
 }
 
 void InputLeaderId::setupPorts() {
@@ -46,16 +54,24 @@ void InputLeaderId::setupLcd() {
 }
 
 void InputLeaderId::loop() {
-  handleInputSwEvent(input_sw_.readState());
+  if (sw_reset_.readState() == TactSwitch::SW_PUSHED) {
+    app_->reset();
+    return;
+  }
+
+  if (sw_read_.readState() == TactSwitchWithLongPush::SW_PUSHED_LONG) {
+    readSampleLeaderId();
+    app_->setLeaderId(ring_buffer_.toString());
+    updateLeaderIdOnLcd();
+
+    return;
+  }
 
   if (reader_serial_->available() > 0) {
     char c = reader_serial_->read();
 
     if (c == '\n') {
       app_->setLeaderId(ring_buffer_.toString());
-      delay(100);
-      digitalWrite(InputAppConfig::PIN_READER_VCC, LOW);
-
       return;
     }
 
@@ -64,17 +80,18 @@ void InputLeaderId::loop() {
   }
 }
 
-void InputLeaderId::handleInputSwEvent(TactSwitch::SwitchState state) {
-  switch (state) {
-  case TactSwitch::SW_PUSHED:
-    inputSwPushed();
-    break;
-  default:
-    break;
-  }
-}
+// 代表者番号の例を読み込む
+void InputLeaderId::readSampleLeaderId() {
+  ring_buffer_.clear();
 
-void InputLeaderId::inputSwPushed() {
+  ring_buffer_.pushBack('0');
+  ring_buffer_.pushBack('1');
+  ring_buffer_.pushBack('9');
+  ring_buffer_.pushBack('0');
+  ring_buffer_.pushBack('0');
+  ring_buffer_.pushBack('0');
+  ring_buffer_.pushBack('1');
+  ring_buffer_.pushBack('9');
 }
 
 void InputLeaderId::updateLeaderIdOnLcd() {
