@@ -42,16 +42,6 @@ void InputApp::reset() {
   state_ = STATE_WAITING;
   leader_id_ = "";
   num_of_members_ = 1;
-
-  // シリアル通信の読み残しがあれば、すべて読んで残りデータを空にする
-  // 本体、バーコードリーダーの両方について行う
-  while (Serial.available() > 0) {
-    Serial.read();
-  }
-
-  while (reader_serial_.available() > 0) {
-    reader_serial_.read();
-  }
 }
 
 void InputApp::loop() {

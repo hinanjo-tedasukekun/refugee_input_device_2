@@ -16,6 +16,11 @@ void SendData::execute(String leader_id, int num_of_members) {
   sw_reset_.reset();
   printSending();
 
+  // シリアル通信の読み残しがあれば、すべて読んで残りデータを空にする
+  while (Serial.available() > 0) {
+    Serial.read();
+  }
+
   String data = leader_id + ',' + num_of_members;
   Serial.println(data);
 
