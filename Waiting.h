@@ -3,6 +3,7 @@
 
 #include "I2CLiquidCrystal.h"
 
+#include "XBeeSleepController.h"
 #include "TactSwitch.h"
 
 class InputApp;
@@ -12,6 +13,8 @@ private:
   InputApp* app_;
   // LCD
   I2CLiquidCrystal* lcd_;
+  // XBee スリープ制御
+  XBeeSleepController xbee_;
   // 送信・受信ボタン
   TactSwitch sw_send_;
 

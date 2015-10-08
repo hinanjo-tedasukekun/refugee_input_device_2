@@ -1,6 +1,9 @@
 #include "Arduino.h"
 #include "InputAppConfig.h"
 
+// XBee スリープ制御ピン
+const int InputAppConfig::PIN_XBEE_SLEEP = 2;
+
 // バーコードリーダー電源制御ピン
 const int InputAppConfig::PIN_READER_VCC = A1;
 // バーコードリーダー RX ピン
@@ -40,5 +43,12 @@ const int InputAppConfig::SW_SHORT_PUSH_COUNT = 5;
 // ボタンが長押しされたと判断するまでのカウント数
 const int InputAppConfig::SW_LONG_PUSH_COUNT = 50;
 
-// 代表者番号入力の制限時間（ミリ秒単位）
+// 代表者番号入力の制限時間 [ms]
 const unsigned long InputAppConfig::INPUT_LEADER_ID_TIME_LIMIT = 15 * 1000;
+
+// XBee ネットワーク参加待ち時間 [ms]
+const int InputAppConfig::WAIT_TIME_FOR_JOIN_TO_NETWORK = 5 * 1000;
+// XBee のスリープ解除待ち時間 [ms]
+const int InputAppConfig::WAIT_TIME_FOR_XBEE_WAKE_UP = 100;
+// 送信後リセットするまでの待ち時間 [ms]
+const int InputAppConfig::WAIT_TIME_AFTER_SEND = 2100;

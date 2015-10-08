@@ -4,6 +4,7 @@
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 
+#include "XBeeSleepController.h"
 #include "InputAppConfig.h"
 #include "InputApp.h"
 #include "InputLeaderId.h"
@@ -13,6 +14,7 @@ InputApp::InputApp() :
   reader_serial_(
     InputAppConfig::PIN_READER_RX, InputAppConfig::PIN_READER_TX
   ),
+  xbee_(InputAppConfig::PIN_XBEE_SLEEP),
   waiting_(this, &lcd_),
   input_leader_id_(this, &lcd_, &reader_serial_),
   input_num_of_members_(this, &lcd_),
@@ -28,14 +30,21 @@ void InputApp::setup() {
   Serial.begin(9600);
   reader_serial_.begin(9600);
 
+  pinMode(InputAppConfig::PIN_XBEE_SLEEP, OUTPUT);
   pinMode(InputAppConfig::PIN_READER_VCC, OUTPUT);
   pinMode(InputAppConfig::PIN_LED_SUCCESS, OUTPUT);
   pinMode(InputAppConfig::PIN_LED_ERROR, OUTPUT);
-  input_leader_id_.setupPorts();
 
   enablePullUpResistorOfSwitches();
+  digitalWrite(InputAppConfig::PIN_LED_SUCCESS, HIGH);
+  digitalWrite(InputAppConfig::PIN_LED_ERROR, HIGH);
 
   lcd_.begin(16, 2);
+  // "ツウシンジュンビチュウ"
+  lcd_.print("\xC2\xB3\xBC\xDD\xBC\xDE\xAD\xDD\xCB\xDE\xC1\xAD\xB3  ");
+
+  xbee_.wakeUp();
+  delay(InputAppConfig::WAIT_TIME_FOR_JOIN_TO_NETWORK);
 }
 
 void InputApp::reset() {

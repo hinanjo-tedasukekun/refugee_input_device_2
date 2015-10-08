@@ -3,6 +3,7 @@
 
 #include "InputAppConfig.h"
 #include "InputApp.h"
+#include "XBeeSleepController.h"
 #include "TactSwitch.h"
 #include "Waiting.h"
 
@@ -10,6 +11,7 @@
 Waiting::Waiting(InputApp* app, I2CLiquidCrystal* lcd) :
   app_(app),
   lcd_(lcd),
+  xbee_(InputAppConfig::PIN_XBEE_SLEEP),
   sw_send_(InputAppConfig::PIN_SW_SEND, InputAppConfig::SW_SHORT_PUSH_COUNT)
 {
 }
@@ -21,6 +23,8 @@ void Waiting::reset() {
 
 // IO ポートを初期状態にする
 void Waiting::setupPorts() {
+  xbee_.sleep();
+
   // バーコードリーダーの電源を切る
   digitalWrite(InputAppConfig::PIN_READER_VCC, LOW);
 

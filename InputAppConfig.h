@@ -4,6 +4,9 @@
 struct InputAppConfig {
   static const int LEADER_ID_LENGTH = 8;
 
+  // XBee スリープ制御ピン
+  static const int PIN_XBEE_SLEEP;
+
   // バーコードリーダー電源制御ピン
   static const int PIN_READER_VCC;
   // バーコードリーダー RX ピン
@@ -43,8 +46,15 @@ struct InputAppConfig {
   // ボタンが長押しされたと判断するまでのカウント数
   static const int SW_LONG_PUSH_COUNT;
 
-  // 代表者番号入力の制限時間（ミリ秒単位）
+  // 代表者番号入力の制限時間 [ms]
   static const unsigned long INPUT_LEADER_ID_TIME_LIMIT;
+
+  // XBee ネットワーク参加待ち時間 [ms]
+  static const int WAIT_TIME_FOR_JOIN_TO_NETWORK;
+  // XBee のスリープ解除待ち時間 [ms]
+  static const int WAIT_TIME_FOR_XBEE_WAKE_UP;
+  // 送信後リセットするまでの待ち時間 [ms]
+  static const int WAIT_TIME_AFTER_SEND;
 };
 
 #endif

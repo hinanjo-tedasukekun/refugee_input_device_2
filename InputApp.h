@@ -4,6 +4,7 @@
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
 
+#include "XBeeSleepController.h"
 #include "Waiting.h"
 #include "InputAppConfig.h"
 #include "InputLeaderId.h"
@@ -26,6 +27,7 @@ public:
 private:
   I2CLiquidCrystal lcd_;
   SoftwareSerial reader_serial_;
+  XBeeSleepController xbee_;
 
   Waiting waiting_;
   InputLeaderId input_leader_id_;
