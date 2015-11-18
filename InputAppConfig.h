@@ -51,8 +51,6 @@ struct InputAppConfig {
 
   // XBee のスリープ解除待ち時間 [ms]
   static const int WAIT_TIME_FOR_XBEE_WAKE_UP;
-  // 送信後リセットするまでの待ち時間 [ms]
-  static const int WAIT_TIME_AFTER_SEND;
 };
 
 #endif

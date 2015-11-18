@@ -25,7 +25,44 @@ void SendData::execute(String leader_id, int num_of_members) {
   printSending();
   send(leader_id, num_of_members);
 
+  processReply();
+}
+
+// 通信の準備を行う
+void SendData::prepareForCommunication() {
+  xbee_.wakeUp();
+  delay(InputAppConfig::WAIT_TIME_FOR_XBEE_WAKE_UP);
+
+  // シリアル通信の読み残しがあれば、すべて読んで残りデータを空にする
+  while (Serial.available() > 0) {
+    Serial.read();
+  }
+}
+
+// データを送信する
+void SendData::send(String leader_id, int num_of_members) {
+  String data = leader_id + ',' + num_of_members;
+  Serial.println(data);
+}
+
+// 返信を処理する
+void SendData::processReply() {
+  unsigned long current_time = millis();
+  unsigned long limit_of_time = current_time + TIMEOUT;
+
   while (1) {
+    current_time = millis();
+    if (current_time >= limit_of_time) {
+      // タイムアウトした場合
+      xbee_.sleep();
+
+      printTimeout();
+      blinkLed(InputAppConfig::PIN_LED_ERROR);
+
+      delay(WAIT_TIME_AFTER_SEND);
+      return;
+    }
+
     if (sw_reset_.readState() == TactSwitch::SW_PUSHED) {
       // リセットボタンが押されたら何もしない
       return;
@@ -54,29 +91,12 @@ void SendData::execute(String leader_id, int num_of_members) {
         break;
       }
 
-      delay(InputAppConfig::WAIT_TIME_AFTER_SEND);
+      delay(WAIT_TIME_AFTER_SEND);
       return;
     }
 
     delay(10);
   }
-}
-
-// 通信の準備を行う
-void SendData::prepareForCommunication() {
-  xbee_.wakeUp();
-  delay(InputAppConfig::WAIT_TIME_FOR_XBEE_WAKE_UP);
-
-  // シリアル通信の読み残しがあれば、すべて読んで残りデータを空にする
-  while (Serial.available() > 0) {
-    Serial.read();
-  }
-}
-
-// データを送信する
-void SendData::send(String leader_id, int num_of_members) {
-  String data = leader_id + ',' + num_of_members;
-  Serial.println(data);
 }
 
 // 通信準備中表示
@@ -112,6 +132,12 @@ void SendData::printError() {
   lcd_->setCursor(0, 1);
   // "トウロクデキマセンデシタ"
   lcd_->print("\xC4\xB3\xDB\xB8\xC3\xDE\xB7\xCF\xBE\xDD\xC3\xDE\xBC\xC0 ");
+}
+
+void SendData::printTimeout() {
+  lcd_->setCursor(0, 1);
+  // "タイムアウト"
+  lcd_->print("\xC0\xB2\xD1\xB1\xB3\xC4         ");
 }
 
 // LED を点滅させる

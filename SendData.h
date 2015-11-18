@@ -9,6 +9,12 @@
 class InputApp;
 
 class SendData {
+public:
+  // タイムアウト [ms]
+  static constexpr int TIMEOUT = 5 * 1000;
+  // 送信後リセットするまでの待ち時間 [ms]
+  static constexpr int WAIT_TIME_AFTER_SEND = 750;
+
 private:
   InputApp* app_;
   // LCD
@@ -29,6 +35,8 @@ private:
   void prepareForCommunication();
   // データを送信する
   void send(String leader_id, int num_of_members);
+  // 返信を処理する
+  void processReply();
 
   // 通信準備中表示
   void printPreparing();
@@ -40,6 +48,8 @@ private:
   void printUpdated();
   // 登録失敗表示
   void printError();
+  // タイムアウト表示
+  void printTimeout();
 
   // LED を点滅させる
   void blinkLed(int pin);
