@@ -49,4 +49,4 @@ const unsigned long InputAppConfig::INPUT_LEADER_ID_TIME_LIMIT = 15 * 1000;
 // XBee のスリープ解除待ち時間 [ms]
 const int InputAppConfig::WAIT_TIME_FOR_XBEE_WAKE_UP = 100;
 // 送信後リセットするまでの待ち時間 [ms]
-const int InputAppConfig::WAIT_TIME_AFTER_SEND = 2100;
+const int InputAppConfig::WAIT_TIME_AFTER_SEND = 500;

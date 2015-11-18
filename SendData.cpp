@@ -116,10 +116,12 @@ void SendData::printError() {
 
 // LED を点滅させる
 void SendData::blinkLed(int pin) {
-  for (int i = 0; i < 3; ++i) {
+  for (int i = 0; i < 2; ++i) {
     digitalWrite(pin, LOW);
     delay(150);
     digitalWrite(pin, HIGH);
     delay(150);
   }
+
+  digitalWrite(pin, LOW);
 }
