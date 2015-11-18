@@ -15,11 +15,12 @@ InputApp::InputApp() :
     InputAppConfig::PIN_READER_RX, InputAppConfig::PIN_READER_TX
   ),
   xbee_(InputAppConfig::PIN_XBEE_SLEEP),
+  confirm_connection_(this, &lcd_),
   waiting_(this, &lcd_),
   input_leader_id_(this, &lcd_, &reader_serial_),
   input_num_of_members_(this, &lcd_),
   send_data_(this, &lcd_),
-  state_(STATE_WAITING),
+  state_(STATE_CONFIRM_CONNECTION),
   prev_state_(STATE_UNKNOWN),
   leader_id_(""),
   num_of_members_(1)
@@ -40,11 +41,6 @@ void InputApp::setup() {
   digitalWrite(InputAppConfig::PIN_LED_ERROR, HIGH);
 
   lcd_.begin(16, 2);
-  // "ツウシンジュンビチュウ"
-  lcd_.print("\xC2\xB3\xBC\xDD\xBC\xDE\xAD\xDD\xCB\xDE\xC1\xAD\xB3  ");
-
-  xbee_.wakeUp();
-  delay(InputAppConfig::WAIT_TIME_FOR_JOIN_TO_NETWORK);
 }
 
 void InputApp::reset() {
@@ -57,6 +53,11 @@ void InputApp::loop() {
   AppState current_state = state_;
 
   switch (current_state) {
+  case STATE_CONFIRM_CONNECTION:
+    confirm_connection_.execute();
+    state_ = STATE_WAITING;
+
+    break;
   case STATE_WAITING:
     if (current_state != prev_state_) {
       waiting_.reset();
@@ -100,15 +101,18 @@ void InputApp::loop() {
   delay(10);
 }
 
+// 代表者番号の入力を開始する
 void InputApp::startInputLeaderId() {
   state_ = STATE_INPUT_LEADER_ID;
 }
 
+// 代表者番号を設定する
 void InputApp::setLeaderId(String leader_id) {
   leader_id_ = leader_id;
   state_ = STATE_INPUT_NUM_OF_MEMBERS;
 }
 
+// 人数を設定する
 void InputApp::setNumOfMembers(int num_of_members) {
   num_of_members_ = num_of_members;
   state_ = STATE_SEND_DATA;

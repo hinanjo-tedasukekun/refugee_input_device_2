@@ -49,8 +49,6 @@ struct InputAppConfig {
   // 代表者番号入力の制限時間 [ms]
   static const unsigned long INPUT_LEADER_ID_TIME_LIMIT;
 
-  // XBee ネットワーク参加待ち時間 [ms]
-  static const int WAIT_TIME_FOR_JOIN_TO_NETWORK;
   // XBee のスリープ解除待ち時間 [ms]
   static const int WAIT_TIME_FOR_XBEE_WAKE_UP;
   // 送信後リセットするまでの待ち時間 [ms]

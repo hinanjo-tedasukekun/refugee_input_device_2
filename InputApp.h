@@ -5,6 +5,7 @@
 #include "SoftwareSerial.h"
 
 #include "XBeeSleepController.h"
+#include "ConfirmConnection.h"
 #include "Waiting.h"
 #include "InputAppConfig.h"
 #include "InputLeaderId.h"
@@ -18,6 +19,7 @@ public:
   // アプリケーションの状態を表す型
   enum AppState {
     STATE_UNKNOWN,              // 未指定
+    STATE_CONFIRM_CONNECTION,   // サーバーとの接続を確認する
     STATE_WAITING,              // 受信ボタンが押されるのを待つ
     STATE_INPUT_LEADER_ID,      // 代表者番号を入力する
     STATE_INPUT_NUM_OF_MEMBERS, // 家族の人数を入力する
@@ -29,6 +31,7 @@ private:
   SoftwareSerial reader_serial_;
   XBeeSleepController xbee_;
 
+  ConfirmConnection confirm_connection_;
   Waiting waiting_;
   InputLeaderId input_leader_id_;
   InputNumOfMembers input_num_of_members_;
