@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
+#include "Led.h"
 #include "TactSwitch.h"
 
 // デバイス集合クラス
@@ -12,7 +13,7 @@ struct DeviceSet {
   static constexpr int PIN_XBEE_SLEEP = 2;
 
   // バーコードリーダー電源制御ピン
-  static constexpr int PIN_READER_VCC = A1;
+  static constexpr int PIN_READER_SW = A1;
   // バーコードリーダー RX ピン
   static constexpr int PIN_READER_RX = A3;
   // バーコードリーダー TX ピン
@@ -45,6 +46,22 @@ struct DeviceSet {
   // リセットボタンピン
   static constexpr int PIN_SW_RESET = A0;
 
+  // LCD のコントラスト
+  static constexpr int LCD_CONTRAST = 30;
+
+  // シリアル通信のボーレート
+  static constexpr int SERIAL_BAUD_RATE = 9600;
+  // バーコードリーダーのボーレート
+  static constexpr int READER_BAUD_RATE = 9600;
+
+  // ボタンが押されたと判断するまでのカウント数
+  static constexpr int SW_PUSH_COUNT = 5;
+
+  // 送信成功 LED
+  Led led_success_;
+  // エラー LED
+  Led led_error_;
+
   // 「1人」ボタン
   TactSwitch sw_1;
   // 「2人」ボタン
@@ -66,8 +83,21 @@ struct DeviceSet {
   // リセットボタン
   TactSwitch sw_reset;
 
+  // LCD
+  I2CLiquidCrystal lcd;
+  // バーコードリーダーのシリアル通信
+  SoftwareSerial reader_serial;
+
+  // コンストラクタ
+  DeviceSet();
+  // デバイスの初期設定を行う
+  void setup();
   // すべてのスイッチの状態をリセットする
   void resetAllSwitches();
+
+private:
+  // プルアップ抵抗を有効にする
+  void enablePullUpResistors();
 };
 
 #endif
