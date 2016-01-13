@@ -9,11 +9,13 @@ TactSwitch::TactSwitch(const int pin, const int push_count) :
 {
 }
 
+// 状態をリセットする
 void TactSwitch::reset() {
   down_count_ = 0;
 }
 
-TactSwitch::SwitchState TactSwitch::readState() {
+// 押下状態を読み込む
+TactSwitch::State TactSwitch::readState() {
   if (digitalRead(pin_) == LOW) {
     // スイッチが下がっている場合
     if (down_count_ < push_count_) {
@@ -24,7 +26,7 @@ TactSwitch::SwitchState TactSwitch::readState() {
   }
 
   // スイッチが上がっている場合
-  SwitchState state = (down_count_ >= push_count_) ? SW_PUSHED : SW_UP;
+  State state = (down_count_ >= push_count_) ? SW_PUSHED : SW_UP;
   down_count_ = 0;
   return state;
 }

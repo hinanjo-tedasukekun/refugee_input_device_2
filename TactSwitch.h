@@ -1,10 +1,11 @@
 #ifndef TACT_SWITCH_H
 #define TACT_SWITCH_H
 
+// タクトスイッチを表すクラス
 class TactSwitch {
 public:
   // スイッチの状態を表す型
-  enum SwitchState {
+  enum State {
     SW_UP,    // 上がっている
     SW_DOWN,  // 下がっている
     SW_PUSHED // 押された
@@ -21,7 +22,7 @@ public:
   // 状態をリセットする
   void reset();
   // 押下状態を読み込む
-  SwitchState readState();
+  State readState();
 };
 
 #endif
