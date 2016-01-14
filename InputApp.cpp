@@ -1,15 +1,22 @@
 #include "DeviceSet.h"
+#include "AppState.h"
+#include "ConfirmConnection.h"
+#include "ConnectionError.h"
+#include "SelectCommand.h"
+#include "TestMode.h"
+#include "BlinkTest.h"
 #include "InputApp.h"
 
 // コンストラクタ
 InputApp::InputApp() :
-  mode_setup_(true),
+  state_setup_(true),
   devices_(),
   confirm_connection_(this, &devices_),
   connection_error_(this, &devices_),
+  select_command_(this, &devices_),
   test_mode_(this, &devices_),
   blink_test_(this, &devices_),
-  mode_(&confirm_connection_)
+  state_(&confirm_connection_)
 {
 }
 
@@ -20,32 +27,32 @@ void InputApp::setup() {
 
 // メインループ
 void InputApp::loop() {
-  if (mode_setup_) {
-    mode_setup_ = false;
-    mode_->setup();
+  if (state_setup_) {
+    state_setup_ = false;
+    state_->setup();
   }
 
-  mode_->loop();
+  state_->loop();
 }
 
 void InputApp::shiftToConfirmConnection() {
-  shiftMode(&confirm_connection_);
+  shiftState(&confirm_connection_);
 }
 
 void InputApp::shiftToConnectionError() {
-  shiftMode(&connection_error_);
+  shiftState(&connection_error_);
 }
 
 void InputApp::shiftToBlinkTest() {
-  shiftMode(&blink_test_);
+  shiftState(&blink_test_);
 }
 
 void InputApp::shiftToTestMode() {
-  shiftMode(&test_mode_);
+  shiftState(&test_mode_);
 }
 
 // モードを変える
-void InputApp::shiftMode(AppState* new_mode) {
-  mode_ = new_mode;
-  mode_setup_ = true;
+void InputApp::shiftState(AppState* new_state) {
+  state_ = new_state;
+  state_setup_ = true;
 }

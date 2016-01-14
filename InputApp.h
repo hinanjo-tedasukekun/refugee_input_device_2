@@ -5,6 +5,7 @@
 #include "AppState.h"
 #include "ConfirmConnection.h"
 #include "ConnectionError.h"
+#include "SelectCommand.h"
 #include "TestMode.h"
 #include "BlinkTest.h"
 
@@ -23,18 +24,19 @@ public:
   void shiftToTestMode();
 private:
   // モードの設定を行うかどうか
-  bool mode_setup_;
+  bool state_setup_;
   // デバイス集合
   DeviceSet devices_;
 
   ConfirmConnection confirm_connection_;
   ConnectionError connection_error_;
+  SelectCommand select_command_;
   TestMode test_mode_;
   BlinkTest blink_test_;
-  AppState* mode_;
+  AppState* state_;
 
   // モードを変える
-  void shiftMode(AppState* new_mode);
+  void shiftState(AppState* new_state);
 };
 
 #endif
