@@ -1,13 +1,13 @@
 #ifndef CONNECTION_ERROR_H
 #define CONNECTION_ERROR_H
 
-#include "AppMode.h"
+#include "AppState.h"
 #include "DeviceSet.h"
 
 class InputApp;
 
 // サーバーとの接続エラー表示
-class ConnectionError : public AppMode {
+class ConnectionError : public AppState {
 public:
   // メッセージ切り替え間隔 [ms]
   static constexpr int MESSAGE_INTERVAL = 2000;

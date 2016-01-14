@@ -2,7 +2,7 @@
 #define INPUT_APP_H
 
 #include "DeviceSet.h"
-#include "AppMode.h"
+#include "AppState.h"
 #include "ConfirmConnection.h"
 #include "ConnectionError.h"
 #include "TestMode.h"
@@ -31,10 +31,10 @@ private:
   ConnectionError connection_error_;
   TestMode test_mode_;
   BlinkTest blink_test_;
-  AppMode* mode_;
+  AppState* mode_;
 
   // モードを変える
-  void shiftMode(AppMode* new_mode);
+  void shiftMode(AppState* new_mode);
 };
 
 #endif

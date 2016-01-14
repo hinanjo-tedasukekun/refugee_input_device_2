@@ -1,8 +1,9 @@
 #ifndef APP_MODE_H
 #define APP_MODE_H
 
-// モードの抽象クラス
-class AppMode {
+// 状態の抽象クラス
+// Non-virtual interface イディオムで書く
+class AppState {
 public:
   // モードの設定を行う
   void setup() {

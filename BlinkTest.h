@@ -1,13 +1,13 @@
 #ifndef BLINK_TEST_H
 #define BLINK_TEST_H
 
-#include "AppMode.h"
+#include "AppState.h"
 #include "DeviceSet.h"
 
 class InputApp;
 
 // テストモードのクラス
-class BlinkTest : public AppMode {
+class BlinkTest : public AppState {
 public:
   // コンストラクタ
   BlinkTest(InputApp* app, DeviceSet* devices);

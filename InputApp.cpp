@@ -45,7 +45,7 @@ void InputApp::shiftToTestMode() {
 }
 
 // モードを変える
-void InputApp::shiftMode(AppMode* new_mode) {
+void InputApp::shiftMode(AppState* new_mode) {
   mode_ = new_mode;
   mode_setup_ = true;
 }

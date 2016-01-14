@@ -1,13 +1,13 @@
 #ifndef CONFIRM_CONNECTION_H
 #define CONFIRM_CONNECTION_H
 
-#include "AppMode.h"
+#include "AppState.h"
 #include "DeviceSet.h"
 
 class InputApp;
 
 // サーバーとの接続確認
-class ConfirmConnection : public AppMode {
+class ConfirmConnection : public AppState {
 public:
   // 最大リトライ回数
   static constexpr int MAX_RETRY = 2;

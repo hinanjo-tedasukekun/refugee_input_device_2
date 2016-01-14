@@ -1,13 +1,13 @@
 #ifndef TEST_MODE_H
 #define TEST_MODE_H
 
-#include "AppMode.h"
+#include "AppState.h"
 #include "DeviceSet.h"
 
 class InputApp;
 
 // テストモードのクラス
-class TestMode : public AppMode {
+class TestMode : public AppState {
 public:
   // コンストラクタ
   TestMode(InputApp* app, DeviceSet* devices);
