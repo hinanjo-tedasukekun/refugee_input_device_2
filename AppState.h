@@ -5,6 +5,9 @@
 // Non-virtual interface イディオムで書く
 class AppState {
 public:
+  // デストラクタ
+  virtual ~AppState() = default;
+
   // モードの設定を行う
   void setup() {
     doSetup();
