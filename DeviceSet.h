@@ -58,9 +58,9 @@ struct DeviceSet {
   static constexpr int SW_PUSH_COUNT = 5;
 
   // 送信成功 LED
-  Led led_success_;
+  Led led_success;
   // エラー LED
-  Led led_error_;
+  Led led_error;
 
   // 「1人」ボタン
   TactSwitch sw_1;
@@ -94,10 +94,6 @@ struct DeviceSet {
   void setup();
   // すべてのスイッチの状態をリセットする
   void resetAllSwitches();
-
-private:
-  // プルアップ抵抗を有効にする
-  void enablePullUpResistors();
 };
 
 #endif

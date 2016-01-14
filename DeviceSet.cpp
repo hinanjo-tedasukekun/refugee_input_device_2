@@ -5,8 +5,8 @@
 
 // コンストラクタ
 DeviceSet::DeviceSet() :
-  led_success_(PIN_LED_SUCCESS),
-  led_error_(PIN_LED_ERROR),
+  led_success(PIN_LED_SUCCESS),
+  led_error(PIN_LED_ERROR),
   sw_1(PIN_SW_1, SW_PUSH_COUNT),
   sw_2(PIN_SW_2, SW_PUSH_COUNT),
   sw_3(PIN_SW_3, SW_PUSH_COUNT),
@@ -52,8 +52,10 @@ void DeviceSet::setup() {
     digitalWrite(pin, HIGH);
   }
 
-  led_success_.turnOff();
-  led_error_.turnOff();
+  led_success.turnOff();
+  led_error.turnOff();
+
+  resetAllSwitches();
 
   Serial.begin(SERIAL_BAUD_RATE);
   reader_serial.begin(READER_BAUD_RATE);
