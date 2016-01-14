@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
+#include "XBeeSleepController.h"
 #include "Led.h"
 #include "TactSwitch.h"
 
@@ -56,6 +57,9 @@ struct DeviceSet {
 
   // ボタンが押されたと判断するまでのカウント数
   static constexpr int SW_PUSH_COUNT = 5;
+
+  // XBee スリープ制御
+  XBeeSleepController xbee;
 
   // 送信成功 LED
   Led led_success;

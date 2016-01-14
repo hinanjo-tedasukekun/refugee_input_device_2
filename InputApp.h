@@ -3,6 +3,8 @@
 
 #include "DeviceSet.h"
 #include "AppMode.h"
+#include "ConfirmConnection.h"
+#include "ConnectionError.h"
 #include "TestMode.h"
 #include "BlinkTest.h"
 
@@ -14,6 +16,9 @@ public:
   void setup();
   // メインループ
   void loop();
+
+  void shiftToConfirmConnection();
+  void shiftToConnectionError();
   void shiftToBlinkTest();
   void shiftToTestMode();
 private:
@@ -21,9 +26,15 @@ private:
   bool mode_setup_;
   // デバイス集合
   DeviceSet devices_;
+
+  ConfirmConnection confirm_connection_;
+  ConnectionError connection_error_;
   TestMode test_mode_;
   BlinkTest blink_test_;
   AppMode* mode_;
+
+  // モードを変える
+  void shiftMode(AppMode* new_mode);
 };
 
 #endif

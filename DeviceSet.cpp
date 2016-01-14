@@ -1,10 +1,14 @@
 #include <Arduino.h>
+#include "I2CLiquidCrystal.h"
+#include "SoftwareSerial.h"
+#include "XBeeSleepController.h"
 #include "Led.h"
 #include "TactSwitch.h"
 #include "DeviceSet.h"
 
 // コンストラクタ
 DeviceSet::DeviceSet() :
+  xbee(PIN_XBEE_SLEEP),
   led_success(PIN_LED_SUCCESS),
   led_error(PIN_LED_ERROR),
   sw_1(PIN_SW_1, SW_PUSH_COUNT),

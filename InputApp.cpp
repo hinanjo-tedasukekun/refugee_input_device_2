@@ -5,9 +5,11 @@
 InputApp::InputApp() :
   mode_setup_(true),
   devices_(),
+  confirm_connection_(this, &devices_),
+  connection_error_(this, &devices_),
   test_mode_(this, &devices_),
   blink_test_(this, &devices_),
-  mode_(&blink_test_)
+  mode_(&confirm_connection_)
 {
 }
 
@@ -26,12 +28,24 @@ void InputApp::loop() {
   mode_->loop();
 }
 
+void InputApp::shiftToConfirmConnection() {
+  shiftMode(&confirm_connection_);
+}
+
+void InputApp::shiftToConnectionError() {
+  shiftMode(&connection_error_);
+}
+
 void InputApp::shiftToBlinkTest() {
-  mode_ = &blink_test_;
-  mode_setup_ = true;
+  shiftMode(&blink_test_);
 }
 
 void InputApp::shiftToTestMode() {
-  mode_ = &test_mode_;
+  shiftMode(&test_mode_);
+}
+
+// モードを変える
+void InputApp::shiftMode(AppMode* new_mode) {
+  mode_ = new_mode;
   mode_setup_ = true;
 }
