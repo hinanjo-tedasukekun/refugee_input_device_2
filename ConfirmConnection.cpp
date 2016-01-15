@@ -46,7 +46,7 @@ void ConfirmConnection::doLoop() {
 
   if (reply[0] == 'A') {
     // Acknowledgement が返ってきたら接続確認成功
-    app_->shiftToBlinkTest();
+    app_->shiftToSelectCommand();
     return;
   }
 

@@ -20,6 +20,7 @@ public:
 
   void shiftToConfirmConnection();
   void shiftToConnectionError();
+  void shiftToSelectCommand();
   void shiftToBlinkTest();
   void shiftToTestMode();
 private:

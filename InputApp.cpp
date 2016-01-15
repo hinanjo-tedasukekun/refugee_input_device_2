@@ -43,6 +43,10 @@ void InputApp::shiftToConnectionError() {
   shiftState(&connection_error_);
 }
 
+void InputApp::shiftToSelectCommand() {
+  shiftState(&select_command_);
+}
+
 void InputApp::shiftToBlinkTest() {
   shiftState(&blink_test_);
 }
