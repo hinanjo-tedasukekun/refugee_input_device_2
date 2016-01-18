@@ -22,7 +22,6 @@ void TestMode::doSetup() {
 // メインループ
 void TestMode::doLoop() {
   handleSwEvents();
-  delay(10);
 }
 
 // スイッチのイベントを処理する

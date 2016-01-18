@@ -5,7 +5,7 @@
 class RingBuffer8 {
 public:
   // バッファの大きさ
-  static const int BUFFER_SIZE = 8;
+  static constexpr int BUFFER_SIZE = 8;
 
 private:
   // 現在のデータの長さ

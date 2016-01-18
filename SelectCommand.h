@@ -35,4 +35,5 @@ private:
   // スイッチのイベントを処理する
   void handleSwitchEvents();
 };
+
 #endif

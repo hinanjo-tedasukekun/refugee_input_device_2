@@ -18,6 +18,8 @@ ConfirmConnection::ConfirmConnection(InputApp* app, DeviceSet* devices) :
 void ConfirmConnection::doSetup() {
   send_count_ = 0;
 
+  devices_->reader.turnOff();
+
   devices_->led_success.turnOff();
   devices_->led_error.turnOff();
   printConnecting();

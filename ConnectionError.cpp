@@ -45,8 +45,6 @@ void ConnectionError::doLoop() {
       printPressResetButton();
     }
   }
-
-  delay(10);
 }
 
 // サーバー確認表示

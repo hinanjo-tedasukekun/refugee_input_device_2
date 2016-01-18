@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
+#include "PowerController.h"
 #include "XBeeSleepController.h"
 #include "Led.h"
 #include "TactSwitch.h"
@@ -8,6 +9,7 @@
 
 // コンストラクタ
 DeviceSet::DeviceSet() :
+  reader(PIN_READER_SW),
   xbee(PIN_XBEE_SLEEP),
   led_success(PIN_LED_SUCCESS),
   led_error(PIN_LED_ERROR),
@@ -55,6 +57,9 @@ void DeviceSet::setup() {
   for (auto pin : pull_up_pins) {
     digitalWrite(pin, HIGH);
   }
+
+  reader.turnOff();
+  xbee.sleep();
 
   led_success.turnOff();
   led_error.turnOff();

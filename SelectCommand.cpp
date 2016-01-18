@@ -30,6 +30,7 @@ SelectCommand::SelectCommand(InputApp* app, DeviceSet* devices) :
 void SelectCommand::doSetup() {
   lcd_update_ = true;
 
+  devices_->reader.turnOff();
   devices_->xbee.sleep();
   devices_->led_success.turnOff();
   devices_->led_error.turnOff();
@@ -50,8 +51,6 @@ void SelectCommand::doLoop() {
     devices_->lcd.setCursor(0, 0);
     devices_->lcd.print(COMMANDS[selected_]);
   }
-
-  delay(10);
 }
 
 // スイッチのイベントを処理する
@@ -70,5 +69,21 @@ void SelectCommand::handleSwitchEvents() {
       lcd_update_ = true;
       return;
     }
+  }
+
+  if (devices_->sw_send.readState() == TactSwitch::SW_PUSHED) {
+    switch (selected_) {
+    case 0:
+      app_->shiftToRegisterFamilyData();
+      break;
+    case 1:
+      app_->shiftToSetPresence();
+      break;
+    default:
+      app_->reset();
+      break;
+    }
+
+    return;
   }
 }
