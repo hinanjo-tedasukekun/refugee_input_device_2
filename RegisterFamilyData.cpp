@@ -28,12 +28,12 @@ void RegisterFamilyData::doSetup() {
 
   devices_->lcd.setCursor(0, 0);
   // "バンゴウ"
-  devices_->lcd.print("\xCA\xDE\xDD\xBA\xDE\xB3  ");
+  devices_->lcd.print(F("\xCA\xDE\xDD\xBA\xDE\xB3  "));
   devices_->lcd.print(app_->getRefugeeNum());
 
   devices_->lcd.setCursor(0, 1);
   // "セタイノニンズウ"
-  devices_->lcd.print("\xBE\xC0\xB2\xC9\xC6\xDD\xBD\xDE\xB3       ");
+  devices_->lcd.print(F("\xBE\xC0\xB2\xC9\xC6\xDD\xBD\xDE\xB3       "));
 }
 
 // メインループ

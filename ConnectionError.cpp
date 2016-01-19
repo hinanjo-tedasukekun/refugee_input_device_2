@@ -51,20 +51,20 @@ void ConnectionError::doLoop() {
 void ConnectionError::printConfirmServer() {
   devices_->lcd.setCursor(0, 0);
   // サーバーヲカクニン
-  devices_->lcd.print("\xBB\xB0\xCA\xDE\xB0\xA6\xB6\xB8\xC6\xDD     ");
+  devices_->lcd.print(F("\xBB\xB0\xCA\xDE\xB0\xA6\xB6\xB8\xC6\xDD     "));
 
   devices_->lcd.setCursor(0, 1);
   // シテクダサイ
-  devices_->lcd.print("\xBC\xC3\xB8\xC0\xDE\xBB\xB2        ");
+  devices_->lcd.print(F("\xBC\xC3\xB8\xC0\xDE\xBB\xB2        "));
 }
 
 // リセットボタン押下指示表示
 void ConnectionError::printPressResetButton() {
   devices_->lcd.setCursor(0, 0);
   // リセットボタンデ
-  devices_->lcd.print("\xD8\xBE\xAF\xC4\xCE\xDE\xC0\xDD\xC3\xDE     ");
+  devices_->lcd.print(F("\xD8\xBE\xAF\xC4\xCE\xDE\xC0\xDD\xC3\xDE     "));
 
   devices_->lcd.setCursor(0, 1);
   // サイセツゾクシマス
-  devices_->lcd.print("\xBB\xB2\xBE\xC2\xBF\xDE\xB8\xBC\xCF\xBD     ");
+  devices_->lcd.print(F("\xBB\xB2\xBE\xC2\xBF\xDE\xB8\xBC\xCF\xBD     "));
 }

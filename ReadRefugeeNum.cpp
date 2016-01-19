@@ -34,11 +34,11 @@ void ReadRefugeeNum::doSetup() {
 
   devices_->lcd.setCursor(0, 0);
   // "バンゴウヲ"
-  devices_->lcd.print("\xCA\xDE\xDD\xBA\xDE\xB3\xA6         ");
+  devices_->lcd.print(F("\xCA\xDE\xDD\xBA\xDE\xB3\xA6         "));
 
   devices_->lcd.setCursor(0, 1);
   // "ヨミトッテクダサイ"
-  devices_->lcd.print("\xD6\xD0\xC4\xAF\xC3\xB8\xC0\xDE\xBB\xB2      ");
+  devices_->lcd.print(F("\xD6\xD0\xC4\xAF\xC3\xB8\xC0\xDE\xBB\xB2      "));
 
   ms_end_ = millis() + TIME_LIMIT;
 }

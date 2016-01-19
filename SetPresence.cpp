@@ -28,12 +28,12 @@ void SetPresence::doSetup() {
 
   devices_->lcd.setCursor(0, 0);
   // "バンゴウ"
-  devices_->lcd.print("\xCA\xDE\xDD\xBA\xDE\xB3  ");
+  devices_->lcd.print(F("\xCA\xDE\xDD\xBA\xDE\xB3  "));
   devices_->lcd.print(app_->getRefugeeNum());
 
   devices_->lcd.setCursor(0, 1);
   // "ニュウシツ タイシツ"
-  devices_->lcd.print(" \xC6\xAD\xB3\xBC\xC2      \xC0\xB2\xBC\xC2");
+  devices_->lcd.print(F(" \xC6\xAD\xB3\xBC\xC2      \xC0\xB2\xBC\xC2"));
 }
 
 // メインループ

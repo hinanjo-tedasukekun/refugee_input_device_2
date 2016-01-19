@@ -101,40 +101,40 @@ void SendData::processReply(char result_ch) {
 void SendData::printPreparing() {
   devices_->lcd.setCursor(0, 1);
   // "ツウシンジュンビチュウ"
-  devices_->lcd.print("\xC2\xB3\xBC\xDD\xBC\xDE\xAD\xDD\xCB\xDE\xC1\xAD\xB3   ");
+  devices_->lcd.print(F("\xC2\xB3\xBC\xDD\xBC\xDE\xAD\xDD\xCB\xDE\xC1\xAD\xB3   "));
 }
 
 // 送信中表示
 void SendData::printSending() {
   devices_->lcd.setCursor(0, 1);
   // "ソウシンチュウ"
-  devices_->lcd.print("\xBF\xB3\xBC\xDD\xC1\xAD\xB3         ");
+  devices_->lcd.print(F("\xBF\xB3\xBC\xDD\xC1\xAD\xB3         "));
 }
 
 // 登録完了表示
 void SendData::printRegistered() {
   devices_->lcd.setCursor(0, 1);
   // "トウロクシマシタ"
-  devices_->lcd.print("\xC4\xB3\xDB\xB8\xBC\xCF\xBC\xC0        ");
+  devices_->lcd.print(F("\xC4\xB3\xDB\xB8\xBC\xCF\xBC\xC0        "));
 }
 
 // 更新完了表示
 void SendData::printUpdated() {
   devices_->lcd.setCursor(0, 1);
   // "コウシンシマシタ"
-  devices_->lcd.print("\xBA\xB3\xBC\xDD\xBC\xCF\xBC\xC0        ");
+  devices_->lcd.print(F("\xBA\xB3\xBC\xDD\xBC\xCF\xBC\xC0        "));
 }
 
 // 登録失敗表示
 void SendData::printError() {
   devices_->lcd.setCursor(0, 1);
   // "トウロクデキマセンデシタ"
-  devices_->lcd.print("\xC4\xB3\xDB\xB8\xC3\xDE\xB7\xCF\xBE\xDD\xC3\xDE\xBC\xC0  ");
+  devices_->lcd.print(F("\xC4\xB3\xDB\xB8\xC3\xDE\xB7\xCF\xBE\xDD\xC3\xDE\xBC\xC0  "));
 }
 
 // タイムアウト表示
 void SendData::printTimeout() {
   devices_->lcd.setCursor(0, 1);
   // "タイムアウト"
-  devices_->lcd.print("\xC0\xB2\xD1\xB1\xB3\xC4          ");
+  devices_->lcd.print(F("\xC0\xB2\xD1\xB1\xB3\xC4          "));
 }

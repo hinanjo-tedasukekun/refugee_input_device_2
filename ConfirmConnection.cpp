@@ -59,8 +59,8 @@ void ConfirmConnection::doLoop() {
 void ConfirmConnection::printConnecting() {
   devices_->lcd.setCursor(0, 0);
   // サーバーニセツゾクチュウ
-  devices_->lcd.print("\xBB\xB0\xCA\xDE\xB0\xC6\xBE\xC2\xBF\xDE\xB8\xC1\xAD\xB3 ");
+  devices_->lcd.print(F("\xBB\xB0\xCA\xDE\xB0\xC6\xBE\xC2\xBF\xDE\xB8\xC1\xAD\xB3 "));
 
   devices_->lcd.setCursor(0, 1);
-  devices_->lcd.print("                ");
+  devices_->lcd.print(F("                "));
 }

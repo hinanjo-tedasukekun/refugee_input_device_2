@@ -38,7 +38,7 @@ void SelectCommand::doSetup() {
 
   devices_->lcd.setCursor(0, 1);
   // "+-デエランデクダサイ"
-  devices_->lcd.print("+-\xC3\xDE\xB4\xD7\xDD\xC3\xDE\xB8\xC0\xDE\xBB\xB2  ");
+  devices_->lcd.print(F("+-\xC3\xDE\xB4\xD7\xDD\xC3\xDE\xB8\xC0\xDE\xBB\xB2  "));
 }
 
 // メインループ
