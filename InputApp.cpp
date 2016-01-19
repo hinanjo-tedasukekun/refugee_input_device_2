@@ -7,8 +7,6 @@
 #include "ReadRefugeeNum.h"
 #include "RegisterFamilyData.h"
 #include "SetPresence.h"
-#include "TestMode.h"
-#include "BlinkTest.h"
 #include "InputApp.h"
 
 // コンストラクタ
@@ -23,8 +21,6 @@ InputApp::InputApp() :
   read_refugee_num_(this, &devices_),
   register_family_data_(this, &devices_),
   set_presence_(this, &devices_),
-  test_mode_(this, &devices_),
-  blink_test_(this, &devices_),
   state_(&confirm_connection_),
   state_after_read_refugee_num_(&select_command_)
 {
@@ -90,14 +86,6 @@ void InputApp::shiftToSetPresence() {
 // 避難者番号の読み取りを終える
 void InputApp::finishReadRefugeeNum() {
   shiftState(state_after_read_refugee_num_);
-}
-
-void InputApp::shiftToBlinkTest() {
-  shiftState(&blink_test_);
-}
-
-void InputApp::shiftToTestMode() {
-  shiftState(&test_mode_);
 }
 
 // モードを変える

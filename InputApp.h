@@ -35,8 +35,6 @@ public:
   void shiftToSetPresence();
   // 避難者番号の読み取りを終える
   void finishReadRefugeeNum();
-  void shiftToBlinkTest();
-  void shiftToTestMode();
 private:
   // モードの設定を行うかどうか
   bool state_setup_;
@@ -54,8 +52,6 @@ private:
   ReadRefugeeNum read_refugee_num_;
   RegisterFamilyData register_family_data_;
   SetPresence set_presence_;
-  TestMode test_mode_;
-  BlinkTest blink_test_;
   // 現在の状態
   AppState* state_;
   // 避難者番号読み取り後の状態
