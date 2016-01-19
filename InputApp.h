@@ -9,8 +9,7 @@
 #include "ReadRefugeeNum.h"
 #include "RegisterFamilyData.h"
 #include "SetPresence.h"
-#include "TestMode.h"
-#include "BlinkTest.h"
+#include "SendData.h"
 
 class InputApp {
 public:
@@ -26,13 +25,19 @@ public:
   // 避難者番号を取得する
   String getRefugeeNum();
   // 避難者番号を設定する
-  void setRefugeeNum(String refugee_num);
+  void setRefugeeNum(String new_refugee_num);
+
+  // 送信するデータを取得する
+  String getSendData();
+  // 送信するデータを設定する
+  void setSendData(String new_send_data);
 
   void shiftToConfirmConnection();
   void shiftToConnectionError();
   void shiftToSelectCommand();
   void shiftToRegisterFamilyData();
   void shiftToSetPresence();
+  void shiftToSendData();
   // 避難者番号の読み取りを終える
   void finishReadRefugeeNum();
 private:
@@ -52,6 +57,8 @@ private:
   ReadRefugeeNum read_refugee_num_;
   RegisterFamilyData register_family_data_;
   SetPresence set_presence_;
+  SendData send_data_state_;
+
   // 現在の状態
   AppState* state_;
   // 避難者番号読み取り後の状態

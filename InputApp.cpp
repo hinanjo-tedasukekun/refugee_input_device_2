@@ -21,6 +21,7 @@ InputApp::InputApp() :
   read_refugee_num_(this, &devices_),
   register_family_data_(this, &devices_),
   set_presence_(this, &devices_),
+  send_data_state_(this, &devices_),
   state_(&confirm_connection_),
   state_after_read_refugee_num_(&select_command_)
 {
@@ -61,6 +62,16 @@ void InputApp::setRefugeeNum(String new_refugee_num) {
   refugee_num_ = new_refugee_num;
 }
 
+// 送信するデータを取得する
+String InputApp::getSendData() {
+  return send_data_;
+}
+
+// 送信するデータを設定する
+void InputApp::setSendData(String new_send_data) {
+  send_data_ = new_send_data;
+}
+
 void InputApp::shiftToConfirmConnection() {
   shiftState(&confirm_connection_);
 }
@@ -86,6 +97,10 @@ void InputApp::shiftToSetPresence() {
 // 避難者番号の読み取りを終える
 void InputApp::finishReadRefugeeNum() {
   shiftState(state_after_read_refugee_num_);
+}
+
+void InputApp::shiftToSendData() {
+  shiftState(&send_data_state_);
 }
 
 // モードを変える

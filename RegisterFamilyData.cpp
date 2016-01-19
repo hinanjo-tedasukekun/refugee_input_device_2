@@ -54,6 +54,13 @@ void RegisterFamilyData::handleSwitchEvents() {
     return;
   }
 
+  if (devices_->sw_send.readState() == TactSwitch::SW_PUSHED) {
+    setSendData();
+    app_->shiftToSendData();
+
+    return;
+  }
+
   if (devices_->sw_1.readState() == TactSwitch::SW_PUSHED) {
     setNumOfMembers(1);
     return;
@@ -106,4 +113,15 @@ void RegisterFamilyData::updateNumOnLcd() {
 
   devices_->lcd.setCursor(14, 1);
   devices_->lcd.print(num_str);
+}
+
+// 送信データを設定する
+void RegisterFamilyData::setSendData() {
+  String send_data("# ");
+
+  send_data += app_->getRefugeeNum();
+  send_data += ' ';
+  send_data += num_of_members_;
+
+  app_->setSendData(send_data);
 }

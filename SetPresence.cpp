@@ -54,6 +54,13 @@ void SetPresence::handleSwitchEvents() {
     return;
   }
 
+  if (devices_->sw_send.readState() == TactSwitch::SW_PUSHED) {
+    setSendData();
+    app_->shiftToSendData();
+
+    return;
+  }
+
   if (devices_->sw_enter.readState() == TactSwitch::SW_PUSHED) {
     present_ = true;
     presence_changed_ = true;
@@ -78,4 +85,15 @@ void SetPresence::updatePresenceOnLcd() {
   // '*' を表示する
   devices_->lcd.setCursor((present_ ? 0 : 11), 1);
   devices_->lcd.print('*');
+}
+
+// 送信データを設定する
+void SetPresence::setSendData() {
+  String send_data("P ");
+
+  send_data += app_->getRefugeeNum();
+  send_data += ' ';
+  send_data += (present_ ? '1' : '0');
+
+  app_->setSendData(send_data);
 }

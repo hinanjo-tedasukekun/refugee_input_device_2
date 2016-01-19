@@ -31,6 +31,8 @@ private:
   void handleSwitchEvents();
   // LCD の在室情報表示を更新する
   void updatePresenceOnLcd();
+  // 送信データを設定する
+  void setSendData();
 };
 
 #endif

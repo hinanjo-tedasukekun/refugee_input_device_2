@@ -33,6 +33,8 @@ private:
   void setNumOfMembers(int num);
   // LCD の人数表示を更新する
   void updateNumOnLcd();
+  // 送信データを設定する
+  void setSendData();
 };
 
 #endif
