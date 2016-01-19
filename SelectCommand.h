@@ -24,8 +24,8 @@ protected:
 private:
   // 選択されているコマンド
   int selected_;
-  // LCD の表示を更新するかどうか
-  bool lcd_update_;
+  // 選択されているコマンドが変化したかどうか
+  bool command_changed_;
 
   // アプリケーション
   InputApp* app_;

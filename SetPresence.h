@@ -6,7 +6,7 @@
 
 class InputApp;
 
-// 在室状況設定クラス
+// 在室情報設定クラス
 class SetPresence : public AppState {
 public:
   // コンストラクタ
@@ -17,6 +17,11 @@ protected:
   // メインループ
   virtual void doLoop();
 private:
+  // 在室情報
+  bool present_;
+  // 在室情報が変化したかどうか
+  bool presence_changed_;
+
   // アプリケーション
   InputApp* app_;
   // デバイス集合
@@ -24,6 +29,8 @@ private:
 
   // スイッチのイベントを処理する
   void handleSwitchEvents();
+  // LCD の在室情報表示を更新する
+  void updatePresenceOnLcd();
 };
 
 #endif

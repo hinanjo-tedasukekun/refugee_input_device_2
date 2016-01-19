@@ -17,6 +17,11 @@ protected:
   // メインループ
   virtual void doLoop();
 private:
+  // 世帯の人数
+  int num_of_members_;
+  // 世帯の人数が変化したかどうか
+  bool num_of_members_changed_;
+
   // アプリケーション
   InputApp* app_;
   // デバイス集合
@@ -24,6 +29,10 @@ private:
 
   // スイッチのイベントを処理する
   void handleSwitchEvents();
+  // 世帯の人数を設定する
+  void setNumOfMembers(int num);
+  // LCD の人数表示を更新する
+  void updateNumOnLcd();
 };
 
 #endif

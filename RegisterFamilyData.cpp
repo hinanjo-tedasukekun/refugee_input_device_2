@@ -8,6 +8,8 @@
 
 // コンストラクタ
 RegisterFamilyData::RegisterFamilyData(InputApp* app, DeviceSet* devices) :
+  num_of_members_(1),
+  num_of_members_changed_(true),
   app_(app),
   devices_(devices)
 {
@@ -15,6 +17,9 @@ RegisterFamilyData::RegisterFamilyData(InputApp* app, DeviceSet* devices) :
 
 // 設定を行う
 void RegisterFamilyData::doSetup() {
+  num_of_members_ = 1;
+  num_of_members_changed_ = true;
+
   devices_->reader.turnOff();
   devices_->xbee.sleep();
   devices_->led_success.turnOff();
@@ -34,6 +39,12 @@ void RegisterFamilyData::doSetup() {
 // メインループ
 void RegisterFamilyData::doLoop() {
   handleSwitchEvents();
+
+  if (num_of_members_changed_) {
+    num_of_members_changed_ = false;
+
+    updateNumOnLcd();
+  }
 }
 
 // スイッチのイベントを処理する
@@ -42,4 +53,57 @@ void RegisterFamilyData::handleSwitchEvents() {
     app_->reset();
     return;
   }
+
+  if (devices_->sw_1.readState() == TactSwitch::SW_PUSHED) {
+    setNumOfMembers(1);
+    return;
+  }
+
+  if (devices_->sw_2.readState() == TactSwitch::SW_PUSHED) {
+    setNumOfMembers(2);
+    return;
+  }
+
+  if (devices_->sw_3.readState() == TactSwitch::SW_PUSHED) {
+    setNumOfMembers(3);
+    return;
+  }
+
+  if (devices_->sw_4.readState() == TactSwitch::SW_PUSHED) {
+    setNumOfMembers(4);
+    return;
+  }
+
+  if (devices_->sw_plus.readState() == TactSwitch::SW_PUSHED) {
+    if (num_of_members_ < 99) {
+      setNumOfMembers(num_of_members_ + 1);
+    }
+
+    return;
+  }
+
+  if (devices_->sw_minus.readState() == TactSwitch::SW_PUSHED) {
+    if (num_of_members_ > 1) {
+      setNumOfMembers(num_of_members_ - 1);
+    }
+
+    return;
+  }
+}
+
+// 世帯の人数を設定する
+void RegisterFamilyData::setNumOfMembers(int num) {
+  num_of_members_ = num;
+  num_of_members_changed_ = true;
+}
+
+// LCD の人数表示を更新する
+void RegisterFamilyData::updateNumOnLcd() {
+  char num_str[] = "NN";
+
+  num_str[0] = '0' + (num_of_members_ / 10);
+  num_str[1] = '0' + (num_of_members_ % 10);
+
+  devices_->lcd.setCursor(14, 1);
+  devices_->lcd.print(num_str);
 }

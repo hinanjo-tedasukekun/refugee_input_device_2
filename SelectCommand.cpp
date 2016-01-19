@@ -20,7 +20,7 @@ const int SelectCommand::N_COMMANDS = sizeof(COMMANDS) / sizeof(COMMANDS[0]);
 // コンストラクタ
 SelectCommand::SelectCommand(InputApp* app, DeviceSet* devices) :
   selected_(0),
-  lcd_update_(true),
+  command_changed_(true),
   app_(app),
   devices_(devices)
 {
@@ -28,7 +28,7 @@ SelectCommand::SelectCommand(InputApp* app, DeviceSet* devices) :
 
 // 設定を行う
 void SelectCommand::doSetup() {
-  lcd_update_ = true;
+  command_changed_ = true;
 
   devices_->reader.turnOff();
   devices_->xbee.sleep();
@@ -45,8 +45,8 @@ void SelectCommand::doSetup() {
 void SelectCommand::doLoop() {
   handleSwitchEvents();
 
-  if (lcd_update_) {
-    lcd_update_ = false;
+  if (command_changed_) {
+    command_changed_ = false;
 
     devices_->lcd.setCursor(0, 0);
     devices_->lcd.print(COMMANDS[selected_]);
@@ -58,7 +58,7 @@ void SelectCommand::handleSwitchEvents() {
   if (devices_->sw_minus.readState() == TactSwitch::SW_PUSHED) {
     if (selected_ > 0) {
       --selected_;
-      lcd_update_ = true;
+      command_changed_ = true;
       return;
     }
   }
@@ -66,7 +66,7 @@ void SelectCommand::handleSwitchEvents() {
   if (devices_->sw_plus.readState() == TactSwitch::SW_PUSHED) {
     if (selected_ < N_COMMANDS - 1) {
       ++selected_;
-      lcd_update_ = true;
+      command_changed_ = true;
       return;
     }
   }
