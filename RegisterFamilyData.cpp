@@ -49,35 +49,15 @@ void RegisterFamilyData::doLoop() {
 
 // スイッチのイベントを処理する
 void RegisterFamilyData::handleSwitchEvents() {
-  if (devices_->sw_reset.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_back.readState() == TactSwitch::SW_PUSHED) {
     app_->reset();
     return;
   }
 
-  if (devices_->sw_send.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_next.readState() == TactSwitch::SW_PUSHED) {
     setSendData();
     app_->shiftToSendData();
 
-    return;
-  }
-
-  if (devices_->sw_1.readState() == TactSwitch::SW_PUSHED) {
-    setNumOfMembers(1);
-    return;
-  }
-
-  if (devices_->sw_2.readState() == TactSwitch::SW_PUSHED) {
-    setNumOfMembers(2);
-    return;
-  }
-
-  if (devices_->sw_3.readState() == TactSwitch::SW_PUSHED) {
-    setNumOfMembers(3);
-    return;
-  }
-
-  if (devices_->sw_4.readState() == TactSwitch::SW_PUSHED) {
-    setNumOfMembers(4);
     return;
   }
 

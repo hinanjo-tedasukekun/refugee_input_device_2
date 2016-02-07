@@ -71,7 +71,7 @@ void SelectCommand::handleSwitchEvents() {
     }
   }
 
-  if (devices_->sw_send.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_next.readState() == TactSwitch::SW_PUSHED) {
     switch (selected_) {
     case 0:
       app_->shiftToRegisterFamilyData();

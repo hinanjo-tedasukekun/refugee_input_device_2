@@ -51,7 +51,7 @@ void ReadRefugeeNum::doLoop() {
     return;
   }
 
-  if (devices_->sw_reset.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_back.readState() == TactSwitch::SW_PUSHED) {
     app_->reset();
     return;
   }

@@ -11,42 +11,37 @@
 
 // デバイス集合クラス
 struct DeviceSet {
+  // 割り込みピン
+  static constexpr int PIN_INT = 2;
+
   // XBee スリープ制御ピン
-  static constexpr int PIN_XBEE_SLEEP = 2;
+  static constexpr int PIN_XBEE_SLEEP = A3;
 
   // バーコードリーダー電源制御ピン
-  static constexpr int PIN_READER_SW = A1;
+  static constexpr int PIN_READER_SW = 13;
+  // RS-232C レベル変換 IC レシーバピン
+  static constexpr int PIN_COM_RECEIVER = 12;
+  // RS-232C レベル変換 IC シャットダウンピン
+  static constexpr int PIN_COM_SHUTDOWN = 11;
   // バーコードリーダー RX ピン
-  static constexpr int PIN_READER_RX = A3;
+  static constexpr int PIN_READER_RX = 9;
   // バーコードリーダー TX ピン
-  static constexpr int PIN_READER_TX = A2;
+  static constexpr int PIN_READER_TX = 10;
 
   // 送信成功 LED ピン
-  static constexpr int PIN_LED_SUCCESS = 4;
+  static constexpr int PIN_LED_SUCCESS = A0;
   // エラー LED ピン
-  static constexpr int PIN_LED_ERROR = 3;
+  static constexpr int PIN_LED_ERROR = A1;
 
-  // 「1人」ボタンピン
-  static constexpr int PIN_SW_1 = 5;
-  // 「2人」ボタンピン
-  static constexpr int PIN_SW_2 = 12;
-  // 「3人」ボタンピン
-  static constexpr int PIN_SW_3 = 6;
-  // 「4人」ボタンピン
-  static constexpr int PIN_SW_4 = 10;
   // 「＋」ボタンピン
-  static constexpr int PIN_SW_PLUS = 13;
+  static constexpr int PIN_SW_PLUS = 6;
   // 「−」ボタンピン
-  static constexpr int PIN_SW_MINUS = 11;
-  // 「入室」ボタンピン
-  static constexpr int PIN_SW_ENTER = 7;
-  // 「退室」ボタンピン
-  static constexpr int PIN_SW_LEAVE = 8;
-  // 「送信」ボタンピン
-  static constexpr int PIN_SW_SEND = 9;
+  static constexpr int PIN_SW_MINUS = 5;
 
-  // リセットボタンピン
-  static constexpr int PIN_SW_RESET = A0;
+  // 「次へ」ボタンピン
+  static constexpr int PIN_SW_NEXT = 8;
+  // 「戻る」ボタンピン
+  static constexpr int PIN_SW_BACK = 7;
 
   // LCD のコントラスト
   static constexpr int LCD_CONTRAST = 30;
@@ -69,26 +64,15 @@ struct DeviceSet {
   // エラー LED
   Led led_error;
 
-  // 「1人」ボタン
-  TactSwitch sw_1;
-  // 「2人」ボタン
-  TactSwitch sw_2;
-  // 「3人」ボタン
-  TactSwitch sw_3;
-  // 「4人」ボタン
-  TactSwitch sw_4;
   // 「＋」ボタン
   TactSwitch sw_plus;
   // 「−」ボタン
   TactSwitch sw_minus;
-  // 「入室」ボタン
-  TactSwitch sw_enter;
-  // 「退室」ボタン
-  TactSwitch sw_leave;
-  // 「送信」ボタン
-  TactSwitch sw_send;
-  // リセットボタン
-  TactSwitch sw_reset;
+
+  // 「次へ」ボタン
+  TactSwitch sw_next;
+  // 「戻る」ボタン
+  TactSwitch sw_back;
 
   // LCD
   I2CLiquidCrystal lcd;

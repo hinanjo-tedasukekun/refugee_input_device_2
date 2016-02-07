@@ -8,12 +8,12 @@ Led::Led(int pin) :
 
 // 点灯させる
 void Led::turnOn() {
-  digitalWrite(pin_, LOW);
+  digitalWrite(pin_, HIGH);
 }
 
 // 消灯させる
 void Led::turnOff() {
-  digitalWrite(pin_, HIGH);
+  digitalWrite(pin_, LOW);
 }
 
 // 点滅させる

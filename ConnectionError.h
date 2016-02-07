@@ -31,8 +31,8 @@ private:
 
   // サーバー確認表示
   void printConfirmServer();
-  // リセットボタン押下指示表示
-  void printPressResetButton();
+  // 次へボタン押下指示表示
+  void printPressNextButton();
 };
 
 #endif

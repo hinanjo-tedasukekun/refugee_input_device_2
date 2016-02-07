@@ -1,7 +1,7 @@
 // vim: filetype=cpp
 
 /*
- * 避難者人数入力端末
+ * 薄型避難者人数入力端末
  */
 
 #include <Wire.h>

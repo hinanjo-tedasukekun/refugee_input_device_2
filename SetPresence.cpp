@@ -49,26 +49,26 @@ void SetPresence::doLoop() {
 
 // スイッチのイベントを処理する
 void SetPresence::handleSwitchEvents() {
-  if (devices_->sw_reset.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_back.readState() == TactSwitch::SW_PUSHED) {
     app_->reset();
     return;
   }
 
-  if (devices_->sw_send.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_next.readState() == TactSwitch::SW_PUSHED) {
     setSendData();
     app_->shiftToSendData();
 
     return;
   }
 
-  if (devices_->sw_enter.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_minus.readState() == TactSwitch::SW_PUSHED) {
     present_ = true;
     presence_changed_ = true;
 
     return;
   }
 
-  if (devices_->sw_leave.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_plus.readState() == TactSwitch::SW_PUSHED) {
     present_ = false;
     presence_changed_ = true;
 

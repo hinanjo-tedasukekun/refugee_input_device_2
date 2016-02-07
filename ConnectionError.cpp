@@ -29,7 +29,7 @@ void ConnectionError::doSetup() {
 
 // メインループ
 void ConnectionError::doLoop() {
-  if (devices_->sw_reset.readState() == TactSwitch::SW_PUSHED) {
+  if (devices_->sw_next.readState() == TactSwitch::SW_PUSHED) {
     app_->shiftToConfirmConnection();
     return;
   }
@@ -42,7 +42,7 @@ void ConnectionError::doLoop() {
     if (message_ == 0) {
       printConfirmServer();
     } else {
-      printPressResetButton();
+      printPressNextButton();
     }
   }
 }
@@ -58,11 +58,11 @@ void ConnectionError::printConfirmServer() {
   devices_->lcd.print(F("\xBC\xC3\xB8\xC0\xDE\xBB\xB2        "));
 }
 
-// リセットボタン押下指示表示
-void ConnectionError::printPressResetButton() {
+// 次へボタン押下指示表示
+void ConnectionError::printPressNextButton() {
   devices_->lcd.setCursor(0, 0);
-  // リセットボタンデ
-  devices_->lcd.print(F("\xD8\xBE\xAF\xC4\xCE\xDE\xC0\xDD\xC3\xDE     "));
+  // 「ツギヘ」ボタンデ
+  devices_->lcd.print(F("\xA2\xC2\xB7\xDE\xCD\xA3\xCE\xDE\xC0\xDD\xC3\xDE    "));
 
   devices_->lcd.setCursor(0, 1);
   // サイセツゾクシマス

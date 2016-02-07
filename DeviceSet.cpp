@@ -13,16 +13,10 @@ DeviceSet::DeviceSet() :
   xbee(PIN_XBEE_SLEEP),
   led_success(PIN_LED_SUCCESS),
   led_error(PIN_LED_ERROR),
-  sw_1(PIN_SW_1, SW_PUSH_COUNT),
-  sw_2(PIN_SW_2, SW_PUSH_COUNT),
-  sw_3(PIN_SW_3, SW_PUSH_COUNT),
-  sw_4(PIN_SW_4, SW_PUSH_COUNT),
   sw_plus(PIN_SW_PLUS, SW_PUSH_COUNT),
   sw_minus(PIN_SW_MINUS, SW_PUSH_COUNT),
-  sw_enter(PIN_SW_ENTER, SW_PUSH_COUNT),
-  sw_leave(PIN_SW_LEAVE, SW_PUSH_COUNT),
-  sw_send(PIN_SW_SEND, SW_PUSH_COUNT),
-  sw_reset(PIN_SW_RESET, SW_PUSH_COUNT),
+  sw_next(PIN_SW_NEXT, SW_PUSH_COUNT),
+  sw_back(PIN_SW_BACK, SW_PUSH_COUNT),
   lcd(LCD_CONTRAST, (bool)false),
   reader_serial(PIN_READER_RX, PIN_READER_TX)
 {
@@ -33,21 +27,18 @@ void DeviceSet::setup() {
   int output_pins[] = {
     PIN_XBEE_SLEEP,
     PIN_READER_SW,
+    PIN_COM_RECEIVER,
+    PIN_COM_SHUTDOWN,
     PIN_LED_SUCCESS,
     PIN_LED_ERROR
   };
 
   int pull_up_pins[] = {
-    PIN_SW_1,
-    PIN_SW_2,
-    PIN_SW_3,
-    PIN_SW_4,
+    PIN_INT,
     PIN_SW_PLUS,
     PIN_SW_MINUS,
-    PIN_SW_ENTER,
-    PIN_SW_LEAVE,
-    PIN_SW_SEND,
-    PIN_SW_RESET
+    PIN_SW_NEXT,
+    PIN_SW_BACK
   };
 
   for (auto pin : output_pins) {
@@ -75,16 +66,10 @@ void DeviceSet::setup() {
 // すべてのスイッチの状態をリセットする
 void DeviceSet::resetAllSwitches() {
   TactSwitch* switches[] = {
-    &sw_1,
-    &sw_2,
-    &sw_3,
-    &sw_4,
     &sw_plus,
     &sw_minus,
-    &sw_enter,
-    &sw_leave,
-    &sw_send,
-    &sw_reset
+    &sw_next,
+    &sw_back
   };
 
   for (auto sw : switches) {
