@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
-#include "PowerController.h"
+#include "BarcodeReaderPowerController.h"
 #include "XBeeSleepController.h"
 #include "Led.h"
 #include "TactSwitch.h"
@@ -9,7 +9,7 @@
 
 // コンストラクタ
 DeviceSet::DeviceSet() :
-  reader(PIN_READER_SW),
+  reader(PIN_READER_SW, PIN_COM_RECEIVER_EN),
   xbee(PIN_XBEE_SLEEP),
   led_success(PIN_LED_SUCCESS),
   led_error(PIN_LED_ERROR),
@@ -27,7 +27,7 @@ void DeviceSet::setup() {
   int output_pins[] = {
     PIN_XBEE_SLEEP,
     PIN_READER_SW,
-    PIN_COM_RECEIVER,
+    PIN_COM_RECEIVER_EN,
     PIN_COM_SHUTDOWN,
     PIN_LED_SUCCESS,
     PIN_LED_ERROR
@@ -48,6 +48,10 @@ void DeviceSet::setup() {
   for (auto pin : pull_up_pins) {
     digitalWrite(pin, HIGH);
   }
+
+  // バーコードリーダーの TX は使わないので
+  // トランスミッタは常にシャットダウンしておく
+  digitalWrite(PIN_COM_SHUTDOWN, LOW);
 
   reader.turnOff();
   xbee.sleep();

@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "I2CLiquidCrystal.h"
 #include "SoftwareSerial.h"
-#include "PowerController.h"
+#include "BarcodeReaderPowerController.h"
 #include "XBeeSleepController.h"
 #include "Led.h"
 #include "TactSwitch.h"
@@ -19,8 +19,8 @@ struct DeviceSet {
 
   // バーコードリーダー電源制御ピン
   static constexpr int PIN_READER_SW = 13;
-  // RS-232C レベル変換 IC レシーバピン
-  static constexpr int PIN_COM_RECEIVER = 12;
+  // RS-232C レベル変換 IC レシーバイネーブルピン
+  static constexpr int PIN_COM_RECEIVER_EN = 12;
   // RS-232C レベル変換 IC シャットダウンピン
   static constexpr int PIN_COM_SHUTDOWN = 11;
   // バーコードリーダー RX ピン
@@ -55,7 +55,7 @@ struct DeviceSet {
   static constexpr int SW_PUSH_COUNT = 5;
 
   // バーコードリーダー電源制御
-  PowerController reader;
+  BarcodeReaderPowerController reader;
   // XBee スリープ制御
   XBeeSleepController xbee;
 
