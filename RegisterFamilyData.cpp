@@ -8,7 +8,7 @@
 
 // コンストラクタ
 RegisterFamilyData::RegisterFamilyData(InputApp* app, DeviceSet* devices) :
-  num_of_members_(1),
+  num_of_members_(3),
   num_of_members_changed_(true),
   app_(app),
   devices_(devices)
@@ -17,7 +17,7 @@ RegisterFamilyData::RegisterFamilyData(InputApp* app, DeviceSet* devices) :
 
 // 設定を行う
 void RegisterFamilyData::doSetup() {
-  num_of_members_ = 1;
+  num_of_members_ = 3;
   num_of_members_changed_ = true;
 
   devices_->reader.turnOff();
