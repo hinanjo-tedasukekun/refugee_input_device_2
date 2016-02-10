@@ -46,7 +46,7 @@ void DeviceSet::setup() {
   }
 
   for (auto pin : pull_up_pins) {
-    digitalWrite(pin, HIGH);
+    pinMode(pin, INPUT_PULLUP);
   }
 
   // バーコードリーダーの TX は使わないので
