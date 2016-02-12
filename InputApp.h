@@ -6,6 +6,7 @@
 #include "ConfirmConnection.h"
 #include "ConnectionError.h"
 #include "SelectCommand.h"
+#include "Sleep.h"
 #include "ReadRefugeeNum.h"
 #include "RegisterFamilyData.h"
 #include "SetPresence.h"
@@ -35,6 +36,7 @@ public:
   void shiftToConfirmConnection();
   void shiftToConnectionError();
   void shiftToSelectCommand();
+  void shiftToSleep();
   void shiftToRegisterFamilyData();
   void shiftToSetPresence();
   void shiftToSendData();
@@ -54,6 +56,7 @@ private:
   ConfirmConnection confirm_connection_;
   ConnectionError connection_error_;
   SelectCommand select_command_;
+  Sleep sleep_;
   ReadRefugeeNum read_refugee_num_;
   RegisterFamilyData register_family_data_;
   SetPresence set_presence_;

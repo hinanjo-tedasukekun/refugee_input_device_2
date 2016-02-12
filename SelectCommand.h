@@ -9,6 +9,9 @@ class InputApp;
 // コマンド選択のクラス
 class SelectCommand : public AppState {
 public:
+  // 入力の制限時間 [ms]
+  static constexpr unsigned long TIME_LIMIT = 15 * 1000;
+
   // コマンド
   static const char* COMMANDS[];
   // コマンドの総数
@@ -26,6 +29,8 @@ private:
   int selected_;
   // 選択されているコマンドが変化したかどうか
   bool command_changed_;
+  // スリープモードに移行する時刻 [ms]
+  unsigned long ms_sleep_;
 
   // アプリケーション
   InputApp* app_;

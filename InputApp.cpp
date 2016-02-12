@@ -4,6 +4,7 @@
 #include "ConfirmConnection.h"
 #include "ConnectionError.h"
 #include "SelectCommand.h"
+#include "Sleep.h"
 #include "ReadRefugeeNum.h"
 #include "RegisterFamilyData.h"
 #include "SetPresence.h"
@@ -18,6 +19,7 @@ InputApp::InputApp() :
   confirm_connection_(this, &devices_),
   connection_error_(this, &devices_),
   select_command_(this, &devices_),
+  sleep_(this, &devices_),
   read_refugee_num_(this, &devices_),
   register_family_data_(this, &devices_),
   set_presence_(this, &devices_),
@@ -82,6 +84,10 @@ void InputApp::shiftToConnectionError() {
 
 void InputApp::shiftToSelectCommand() {
   shiftState(&select_command_);
+}
+
+void InputApp::shiftToSleep() {
+  shiftState(&sleep_);
 }
 
 void InputApp::shiftToRegisterFamilyData() {

@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <limits.h>
 #include "I2CLiquidCrystal.h"
 #include "Led.h"
 #include "TactSwitch.h"
@@ -21,6 +22,7 @@ const int SelectCommand::N_COMMANDS = sizeof(COMMANDS) / sizeof(COMMANDS[0]);
 SelectCommand::SelectCommand(InputApp* app, DeviceSet* devices) :
   selected_(0),
   command_changed_(true),
+  ms_sleep_(ULONG_MAX),
   app_(app),
   devices_(devices)
 {
@@ -39,10 +41,18 @@ void SelectCommand::doSetup() {
   devices_->lcd.setCursor(0, 1);
   // "+-デエランデクダサイ"
   devices_->lcd.print(F("+-\xC3\xDE\xB4\xD7\xDD\xC3\xDE\xB8\xC0\xDE\xBB\xB2  "));
+
+  ms_sleep_ = millis() + TIME_LIMIT;
 }
 
 // メインループ
 void SelectCommand::doLoop() {
+  if (millis() > ms_sleep_) {
+    // 制限時間を過ぎた場合、節電のためスリープモードに移行する
+    app_->shiftToSleep();
+    return;
+  }
+
   handleSwitchEvents();
 
   if (command_changed_) {
