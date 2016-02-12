@@ -32,7 +32,7 @@ void Sleep::doSetup() {
   devices_->lcd.print(F("\xBD\xD8\xB0\xCC\xDF\xD3\xB0\xC4\xDE       "));
 
   devices_->lcd.setCursor(0, 1);
-  // "「ツギヘ」でカイジョシマス
+  // "「ツギヘ」デカイジョシマス"
   devices_->lcd.print(F("\xA2\xC2\xB7\xDE\xCD\xA3\xC3\xDE\xB6\xB2\xBC\xDE\xAE\xBC\xCF\xBD"));
 
   // スリープモードと割り込みを設定する
